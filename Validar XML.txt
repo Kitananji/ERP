@@ -1,0 +1,22 @@
+private bool ValidateXML(string xmlFile, string xsdFile)
+        {
+
+            bool isValid = false;
+            XmlReaderSettings settings = new XmlReaderSettings();
+            try
+            {
+                settings.Schemas.Add(null, xsdFile);
+                settings.ValidationType = ValidationType.Schema;
+                XmlDocument document = new XmlDocument();
+                document.Load(xmlFile);
+                XmlReader rdr = XmlReader.Create(new StringReader(document.InnerXml), settings);
+
+                while (rdr.Read())
+                {
+
+                }
+                isValid = true;
+            }
+            catch { }            
+            return isValid;
+        }

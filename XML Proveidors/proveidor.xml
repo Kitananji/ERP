@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<proveidors xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema.xsd">
+  <proveidor>
+    <codi>0000</codi>
+    <nom>proveidor1</nom>
+    <adreça>can pixa</adreça>
+    <poblacio>cap</poblacio>
+    <cp>17460</cp>
+  </proveidor> 
+</proveidors>
