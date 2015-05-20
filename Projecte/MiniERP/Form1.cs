@@ -62,17 +62,14 @@ namespace MiniERP
         {
             const string RUTA = "articles.xml";
 
-            bool esValid;
-            string codi = "";
-            string descripcio = "";
+            string codi;
+            string descripcio;
             int stock;
             int preu;
             XmlDocument xml;
             XmlNodeList xnList;
 
-
-            esValid = ValidateXML("articles.xml", "articles.xsd");
-            if (esValid)
+            if (ValidateXML("articles.xml", "articles.xsd"))
             {
                 cn.Open(); //Obrir el acces
 
