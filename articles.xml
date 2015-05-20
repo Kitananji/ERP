@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<articles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="articles.xsd">
+<article>
+	<codi>1234</codi>
+	<descripcio>Descripcio</descripcio>
+	<estoc>22</estoc>
+	<preu>12.42</preu>
+</article>
+  <article>
+    <codi>1121</codi>
+    <descripcio>Descripcio 2</descripcio>
+    <estoc>2</estoc>
+    <preu>1.45</preu>
+  </article>
+
+
+</articles>  
