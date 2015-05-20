@@ -56,9 +56,12 @@ namespace MiniERP
             ImportarProveidors();
         }
 
+
         //Methods
         private void ImportarArticles()
         {
+            const string RUTA = "articles.xml";
+
             bool esValid;
             string codi = "";
             string descripcio = "";
@@ -74,7 +77,7 @@ namespace MiniERP
                 cn.Open(); //Obrir el acces
 
                 xml = new XmlDocument();
-                xml.Load("articles.xml");
+                xml.Load(RUTA);
                 xnList = xml.SelectNodes("/articles/article");
 
                 OdbcCommand cmd = new OdbcCommand();
@@ -96,8 +99,9 @@ namespace MiniERP
                 #endregion
 
                 cn.Close(); //Tencar el acces
+                MessageBox.Show("Importació realitzada correctament", "Importacio correcta");
             }
-            else MessageBox.Show("FITXER XML D'ARTICLES NO VÀLID", "Error de validació");
+            else MessageBox.Show("FITXER XML D'ARTICLES NO VÀLID", "Error de validació", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void ImportarProveidors()

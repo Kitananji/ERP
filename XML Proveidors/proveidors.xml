@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0"?>
-<proveidors xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema.xsd">
+<proveidors xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="proveidors.xsd">
   <proveidor>
     <codi>CP1220</codi>
     <nom>proveidor1</nom>
