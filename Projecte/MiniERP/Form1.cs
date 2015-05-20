@@ -64,32 +64,38 @@ namespace MiniERP
             string descripcio = "";
             int stock;
             int preu;
-            string temp;
             XmlDocument xml;
             XmlNodeList xnList;
+
+
             esValid = ValidateXML("articles.xml", "articles.xsd");
             if (esValid)
             {
+                cn.Open(); //Obrir el acces
+
                 xml = new XmlDocument();
                 xml.Load("articles.xml");
                 xnList = xml.SelectNodes("/articles/article");
-                cn.Open();
+
                 OdbcCommand cmd = new OdbcCommand();
                 cmd.Connection = cn;
 
+                #region Insertar articles
                 foreach (XmlNode xn in xnList)
                 {
+                    //Obtenir les dades
                     codi = xn["codi"].InnerText;
                     descripcio = xn["descripcio"].InnerText;
                     stock = Convert.ToInt32(xn["estoc"].InnerText);
-                    temp = xn["preu"].InnerText;
-                    temp = temp.Replace('.', ',');
-                    preu = (int)Convert.ToDouble(temp);
+                    preu = Convert.ToInt32(xn["preu"].InnerText);
+
+                    //Insert
                     cmd.CommandText = "INSERT INTO article VALUES ('" + codi + "','" + descripcio + "'," + stock + "," + preu + ");";
                     cmd.ExecuteNonQuery();
                 }
+                #endregion
 
-                cn.Close();
+                cn.Close(); //Tencar el acces
             }
             else MessageBox.Show("FITXER XML D'ARTICLES NO VÀLID", "Error de validació");
         }

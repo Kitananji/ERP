@@ -22,3 +22,5 @@ K:\Documents\Documents de Cicle Formatiu\Llenguatges de marques\Mini ERP\MiniERP
 K:\Documents\Documents de Cicle Formatiu\Llenguatges de marques\Mini ERP\MiniERP\obj\x86\Debug\MiniERP.frmERP.resources
 K:\Documents\Documents de Cicle Formatiu\Llenguatges de marques\Mini ERP\MiniERP\obj\x86\Debug\MiniERP.Properties.Resources.resources
 K:\Documents\Documents de Cicle Formatiu\Llenguatges de marques\Mini ERP\MiniERP\obj\x86\Debug\MiniERP.csproj.GenerateResource.Cache
+K:\Documents\GitHub\ERP\Projecte\MiniERP\obj\x86\Debug\MiniERP.exe
+K:\Documents\GitHub\ERP\Projecte\MiniERP\obj\x86\Debug\MiniERP.pdb
