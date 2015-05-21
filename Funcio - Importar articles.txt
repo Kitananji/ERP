@@ -1,0 +1,42 @@
+private void ImportarArticles()
+        {
+            const string RUTA = "articles.xml";
+
+            string codi;
+            string descripcio;
+            int stock;
+            int preu;
+            XmlDocument xml;
+            XmlNodeList xnList;
+
+            if (ValidateXML("articles.xml", "articles.xsd"))
+            {
+                cn.Open(); //Obrir el acces
+
+                xml = new XmlDocument();
+                xml.Load(RUTA);
+                xnList = xml.SelectNodes("/articles/article");
+
+                OdbcCommand cmd = new OdbcCommand();
+                cmd.Connection = cn;
+
+                #region Insertar articles
+                foreach (XmlNode xn in xnList)
+                {
+                    //Obtenir les dades
+                    codi = xn["codi"].InnerText;
+                    descripcio = xn["descripcio"].InnerText;
+                    stock = Convert.ToInt32(xn["estoc"].InnerText);
+                    preu = Convert.ToInt32(xn["preu"].InnerText);
+
+                    //Insert
+                    cmd.CommandText = "INSERT INTO article VALUES ('" + codi + "','" + descripcio + "'," + stock + "," + preu + ");";
+                    cmd.ExecuteNonQuery();
+                }
+                #endregion
+
+                cn.Close(); //Tencar el acces
+                MessageBox.Show("Importació realitzada correctament", "Importacio correcta");
+            }
+            else MessageBox.Show("FITXER XML D'ARTICLES NO VÀLID", "Error de validació", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
