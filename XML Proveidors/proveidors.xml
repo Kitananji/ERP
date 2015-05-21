@@ -1,10 +1,37 @@
 ﻿<?xml version="1.0"?>
 <proveidors xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="proveidors.xsd">
-  <proveidor>
-    <codi>CP12</codi>
-    <nom>proveidor1</nom>
-    <adreça>can pixa</adreça>
-    <poblacio>cap</poblacio>
-    <cp>17460</cp>
-  </proveidor> 
-</proveidors>
+<proveidor>
+	<codi>CP10</codi>
+	<nom>Comercial paperera, materials d'ificina</nom>
+	<adreça>Pol. Ind Mas Xirgu II</adreça>
+	<poblacio>Girona</poblacio>
+	<cp>17005</cp>
+</proveidor>   
+<proveidor>
+	<codi>AB11</codi>
+	<nom>Abacus Cooperativa</nom>
+	<adreça>Carretera de Barcelona, 42-44</adreça>
+	<poblacio>Girona</poblacio>
+	<cp>17002</cp>
+</proveidor>  
+<proveidor>
+	<codi>MSS1</codi>
+	<nom>Massegur</nom>
+	<adreça>Plaça Calvet i Rubalcava, 8</adreça>
+	<cp>17002</cp>
+</proveidor>  
+<proveidor>
+	<codi>BBCP</codi>
+	<nom>Bisbal Copy</nom>
+	<adreça>C/Solidaritat, 40</adreça>
+	<poblacio>La Bisbal d'Empordà</poblacio>
+	<cp>17100</cp>
+</proveidor>
+<proveidor>
+	<codi>NPP</codi>
+	<nom>Neus Paper</nom>
+	<adreça>Hortes, 17</adreça>
+	<poblacio>Girona</poblacio>
+	<cp>17010</cp>
+</proveidor> 
+</proveidors> 
