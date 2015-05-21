@@ -6,7 +6,7 @@
   <xs:complexType name="tipusComandes">
     <xs:sequence>
       <xs:sequence>
-        <xs:element name="comanda" type="tipusComanda" maxOccurs="unbounded"/>
+        <xs:element name="comanda" type="tipusComanda"/>
       </xs:sequence>
     </xs:sequence>
   </xs:complexType>

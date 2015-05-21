@@ -148,6 +148,53 @@ namespace MiniERP
             else MessageBox.Show("FITXER XML D'ARTICLES NO VÀLID", "Error de validació", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        private void ImportarComanad()
+        {
+            const string RUTA = "comanda.xml";
+
+            string codi;
+            string descripcio;
+            int stock;
+            int preu;
+            XmlDocument xml;
+            XmlNodeList xnList;
+            XmlNodeList xnListArticles;
+
+            OdbcCommand cmd;
+
+            if (ValidateXML("comanda.xml", "comanda.xsd"))
+            {
+                cn.Open(); //Obrir el access
+
+                xml = new XmlDocument();
+                xml.Load(RUTA);
+                xnList = xml.SelectNodes("/comandes/comanda");
+                
+                cmd = new OdbcCommand();
+                cmd.Connection = cn;
+
+                #region Insertar articles
+                foreach (XmlNode xn in xnList)
+                {
+                    //Obtenir les dades
+                    codi = xn["codi"].InnerText;
+                    descripcio = xn["descripcio"].InnerText;
+                    stock = Convert.ToInt32(xn["estoc"].InnerText);
+                    preu = Convert.ToInt32(xn["preu"].InnerText);
+
+                    //Insert
+                    cmd.CommandText = "INSERT INTO article VALUES ('" + codi + "','" + descripcio + "'," + stock + "," + preu + ");";
+                    cmd.ExecuteNonQuery();
+                }
+                #endregion
+
+                cn.Close(); //Tencar el access
+                MessageBox.Show("Importació realitzada correctament", "Importacio correcta");
+            }
+            else MessageBox.Show("FITXER XML D'ARTICLES NO VÀLID", "Error de validació", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+
         private bool ValidateXML(string xmlFile, string xsdFile)
         {
 
