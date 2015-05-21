@@ -1,25 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-<<<<<<< HEAD
-  <xs:element name="comanda" type="tipusComanda"/>
-=======
   <xs:element name="comandes" type="tipusComandes"/>
 
   <xs:complexType name="tipusComandes">
     <xs:sequence>
       <xs:sequence>
-        <xs:element name="comanda" type="tipusComanda" maxOccurs="unbounded"/>
+        <xs:element name="comanda" type="tipusComanda"/>
       </xs:sequence>
     </xs:sequence>
   </xs:complexType>
->>>>>>> origin/master
   
   <xs:complexType name="tipusComanda">
     <xs:sequence>
       <xs:element name="codiProv" type="tipusCodi"/>
       <xs:element name="data" type="xs:date"/>
       <xs:element name="articles" type="tipusArticles"/>
+      
     </xs:sequence>
   </xs:complexType>
 
