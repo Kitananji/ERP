@@ -77,7 +77,7 @@
             this.incorporarComandaToolStripMenuItem,
             this.recepcionarAlbaràToolStripMenuItem});
             this.importarToolStripMenuItem.Name = "importarToolStripMenuItem";
-            this.importarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importarToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.importarToolStripMenuItem.Text = "Importar";
             // 
             // articlesToolStripMenuItem1
@@ -114,7 +114,7 @@
             this.articlesPendentsPerProveïdorToolStripMenuItem,
             this.valoracióStockToolStripMenuItem});
             this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
-            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.exportarToolStripMenuItem.Text = "Exportar";
             this.exportarToolStripMenuItem.Click += new System.EventHandler(this.exportarToolStripMenuItem_Click);
             // 
@@ -191,7 +191,7 @@
             this.Controls.Add(this.mnuMain);
             this.MainMenuStrip = this.mnuMain;
             this.Name = "frmERP";
-            this.Text = "MINI ERP - BY DAM";
+            this.Text = "MINI ERP - A&A paperstore";
             this.Load += new System.EventHandler(this.frmERP_Load);
             this.mnuMain.ResumeLayout(false);
             this.mnuMain.PerformLayout();

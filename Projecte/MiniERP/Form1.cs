@@ -68,16 +68,17 @@ namespace MiniERP
             int preu;
             XmlDocument xml;
             XmlNodeList xnList;
+            OdbcCommand cmd;
 
             if (ValidateXML("articles.xml", "articles.xsd"))
             {
-                cn.Open(); //Obrir el acces
+                cn.Open(); //Obrir el access
 
                 xml = new XmlDocument();
                 xml.Load(RUTA);
                 xnList = xml.SelectNodes("/articles/article");
 
-                OdbcCommand cmd = new OdbcCommand();
+                cmd = new OdbcCommand();
                 cmd.Connection = cn;
 
                 #region Insertar articles
@@ -95,7 +96,7 @@ namespace MiniERP
                 }
                 #endregion
 
-                cn.Close(); //Tencar el acces
+                cn.Close(); //Tencar el access
                 MessageBox.Show("Importació realitzada correctament", "Importacio correcta");
             }
             else MessageBox.Show("FITXER XML D'ARTICLES NO VÀLID", "Error de validació", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -103,7 +104,48 @@ namespace MiniERP
 
         private void ImportarProveidors()
         {
+            string RUTA = "proveidors.xml";
 
+            string codi;
+            string nom;
+            string direccio;
+            string poble;
+            string cPostal;
+            XmlDocument xml;
+            XmlNodeList xnList;
+            OdbcCommand cmd;
+
+            if (ValidateXML("proveidors.xml", "proveidors.xsd"))
+            {
+                cn.Open(); //Obrir access
+
+                xml = new XmlDocument();
+                xml.Load(RUTA);
+                xnList = xml.SelectNodes("/proveidors/proveidor");
+
+                cmd = new OdbcCommand();
+                cmd.Connection = cn;
+
+                #region Insertar Proveidors
+                foreach (XmlNode xn in xnList)
+                {
+                    //obtenim del xml
+                    codi = xn["codi"].InnerText;
+                    nom = xn["nom"].InnerText;
+                    direccio = xn["adreça"].InnerText;
+                    poble = xn["poblacio"].InnerText;
+                    cPostal = xn["cp"].InnerText;
+
+                    //les guardem a access
+                    cmd.CommandText = "INSERT INTO proveidor VALUES ('" + codi + "','" + nom + "','" + direccio + "','" + poble + "','" + cPostal + "');";
+                    cmd.ExecuteNonQuery();
+                }
+                #endregion
+
+                cn.Close(); //Tencar el access
+                MessageBox.Show("Importació realitzada correctament", "Importacio correcta");
+            }
+            else MessageBox.Show("FITXER XML D'ARTICLES NO VÀLID", "Error de validació", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private bool ValidateXML(string xmlFile, string xsdFile)

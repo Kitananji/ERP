@@ -14,7 +14,7 @@
       <xs:element name="codi" type="tipusCodi" />
       <xs:element name="descripcio" type="xs:string" />
       <xs:element name="estoc" type="xs:integer" />
-      <xs:element name="preu" type="xs:double" />
+      <xs:element name="preu" type="xs:integer" />
     </xs:sequence>   
   </xs:complexType>
   
