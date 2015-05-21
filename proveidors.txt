@@ -1,0 +1,48 @@
+private void proveïdorsToolStripMenuItem1_Click(object sender, EventArgs e)
+{
+        string RUTA = "proveidors.xml";
+
+        string codi;
+        string nom ;
+        string direccio;
+        string poble;
+        string cPostal;
+
+        XmlDocument xml;
+        XmlNodeList xnList;
+
+        
+        OdbcCommand cmd;
+
+    if (ValidateXML("proveidors.xml", "proveidors.xsd"))
+    {
+        cn.Open();
+
+        xml = new XmlDocument();
+        xml.Load(RUTA);
+        xnList = xml.SelectNodes("/proveidors/proveidor");
+
+        cmd = new OdbcCommand();
+        cmd.Connection = cn;
+        
+        foreach (XmlNode xn in xnList)
+        {
+            //obtenim del xml
+            codi = xn["codi"].InnerText;
+            nom = xn["nom"].InnerText;
+            direccio = xn["adreça"].InnerText;
+            poble = xn["poblacio"].InnerText;
+            cPostal = xn["cp"].InnerText;
+
+            //les guardem a access
+            cmd.CommandText = "INSERT INTO proveidor VALUES ('" + codi + "','" + nom + "','" + direccio + "','" + poble + "','" + cPostal + "');";
+            cmd.ExecuteNonQuery();
+            MessageBox.Show(direccio, "caca");
+        }
+
+        cn.Close();
+    }
+    else
+        MessageBox.Show("Arxiu no valid", "Error");
+   
+}
