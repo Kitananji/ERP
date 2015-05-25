@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<albara xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="comanda.xsd">
-	<comanda></comanda>
+<albara xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="albara.xsd">
+  <codiComanda>1</codiComanda>
 	<data>2015-05-27</data>	
 	<articles>
 		<article>
@@ -13,7 +13,7 @@
 			<quant>30</quant>
 			<preu>100</preu>
 		</article>
-		<article> 
+		<article>
 			<codi>JU01</codi>
 			<quant>5</quant>
 			<preu>250</preu>
