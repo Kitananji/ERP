@@ -22,7 +22,6 @@
       <xs:element name="codi" type="tipusCodi"/>
       <xs:element name="quant" type="xs:integer"/>
       <xs:element name="preu" type="xs:integer"/>
-      <xs:element name="rebut" type="xs:boolean"/>
     </xs:sequence>
   </xs:complexType>
   

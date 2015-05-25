@@ -7,49 +7,41 @@
 				<codi>AL01</codi>
 				<quant>10</quant> 
 				<preu>77</preu>
-				<rebut>false</rebut>
 			</article>
 			<article>
 				<codi>AR04</codi>
 				<quant>30</quant>
 				<preu>100</preu>
-				<rebut>false</rebut>
 			</article>
 			<article> 
 				<codi>JU01</codi>
 				<quant>5</quant>
 				<preu>250</preu>
-				<rebut>false</rebut>
 			</article>
 			<article>
 				<codi>JU02</codi>
 				<quant>10</quant>
 				<preu>335</preu>
-				<rebut>false</rebut>
 			</article>
 			<article>
 				<codi>JU03</codi>
 				<quant>6</quant>
 				<preu>1800</preu>
-				<rebut>false</rebut>
 			</article>
 			<article>
 				<codi>TA03</codi>
 				<quant>2</quant>
 				<preu>400</preu>
-				<rebut>false</rebut>
 			</article>
 			<article>
 				<codi>BK01</codi>
 				<quant>20</quant>
 				<preu>75</preu>
-				<rebut>false</rebut>
 			</article>
 			<article>
 				<codi>BL04</codi>
 				<quant>7</quant>
 				<preu>80</preu>
-				<rebut>false</rebut>
 			</article>
 		</articles>
 </comanda>  
