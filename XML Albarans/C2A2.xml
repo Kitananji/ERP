@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<albara xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="albara.xsd">
+  <codiComanda>1</codiComanda>
+	<data>2015-06-04</data>	
+	<articles>
+		<article>
+			<codi>BK01</codi>
+			<quant>11</quant>
+			<preu>80</preu>
+		</article>
+		<article>
+			<codi>BL05</codi>
+			<quant>4</quant>
+			<preu>70</preu>
+		</article>
+		<article>
+			<codi>BL07</codi>
+			<quant>13</quant>
+			<preu>47</preu>
+		</article>
+		<article>
+			<codi>BL03</codi>
+			<quant>100</quant>
+			<preu>300</preu>
+		</article>
+	</articles>
+</albara>  
