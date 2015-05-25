@@ -106,6 +106,7 @@
             this.recepcionarAlbaràToolStripMenuItem.Name = "recepcionarAlbaràToolStripMenuItem";
             this.recepcionarAlbaràToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.recepcionarAlbaràToolStripMenuItem.Text = "Recepcionar Albarà";
+            this.recepcionarAlbaràToolStripMenuItem.Click += new System.EventHandler(this.recepcionarAlbaràToolStripMenuItem_Click);
             // 
             // exportarToolStripMenuItem
             // 

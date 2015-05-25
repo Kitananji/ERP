@@ -58,11 +58,15 @@ namespace MiniERP
 
         private void incorporarComandaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string nomFitxer;
+            openFileDialog1.InitialDirectory = Application.StartupPath;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                nomFitxer = openFileDialog1.FileName;
 
-            ImportarComanada("comanda1.xml");
-            ImportarComanada("comanda2.xml");
+                ImportarComanda(nomFitxer);            
+            }
         }
-
 
         //Methods
         private void ImportarArticles()
@@ -108,7 +112,16 @@ namespace MiniERP
             }
             else MessageBox.Show("FITXER XML D'ARTICLES NO VÀLID", "Error de validació", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+        private void ActualitzarComandaDeAlbara(string codiCom, string codiArt)
+        {//La connexio ja esta oberta
+            OdbcCommand cmd = new OdbcCommand();
 
+            cmd.Connection = cn;
+            cmd.CommandText = "UPDATE dcomanda set rebut=true where codicomanda=" + codiCom + " AND codiarticle =  '" + codiArt + "';";
+
+            cmd.ExecuteNonQuery();
+
+        }
         private void ImportarProveidors()
         {
             string RUTA = "proveidors.xml";
@@ -155,7 +168,7 @@ namespace MiniERP
             else MessageBox.Show("FITXER XML D'ARTICLES NO VÀLID", "Error de validació", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void ImportarComanada(string xmlFilename)
+        private void ImportarComanda(string xmlFilename)
         {
 
             int id;
@@ -163,8 +176,7 @@ namespace MiniERP
             DateTime data;
             string codiArt;
             int quant;
-            int preu;
-            bool rebut;
+            int preu;            
             XmlDocument xml;
             XmlNode xn;
             XmlNodeList xnListArticles;
@@ -181,7 +193,7 @@ namespace MiniERP
                 cmd.Connection = cn;
 
                 //Ccomanda  
-                #region Insertar Comanada
+                #region Insertar Comanda
                 codiProv = xn["codiProv"].InnerText;
                 data = Convert.ToDateTime(xn["data"].InnerText);
                 xnListArticles = xn.SelectNodes("artices/article");
@@ -205,9 +217,8 @@ namespace MiniERP
                 {
                     codiArt = xnArt["codi"].InnerText;
                     quant = Convert.ToInt32(xnArt["quant"].InnerText);
-                    preu = Convert.ToInt32(xnArt["preu"].InnerText);
-                    rebut = Convert.ToBoolean(xnArt["rebut"].InnerText);
-                    cmd.CommandText = "INSERT INTO dcomanda VALUES ('" + id + "', '" + codiArt + "', " + quant + ", " + preu + ", " + rebut + ");";
+                    preu = Convert.ToInt32(xnArt["preu"].InnerText);               
+                    cmd.CommandText = "INSERT INTO dcomanda VALUES ('" + id + "', '" + codiArt + "', " + quant + ", " + preu + ");";
                     cmd.ExecuteNonQuery();
                 }
                 #endregion
@@ -239,6 +250,13 @@ namespace MiniERP
             }
             catch { }
             return isValid;
+        }
+
+        private void recepcionarAlbaràToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cn.Open();
+            ActualitzarComandaDeAlbara("1", "AR04");
+            cn.Close();
         }
 
 
