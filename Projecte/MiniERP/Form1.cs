@@ -56,6 +56,13 @@ namespace MiniERP
             ImportarProveidors();
         }
 
+        private void incorporarComandaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            ImportarComanada("comanda1.xml");
+            ImportarComanada("comanda2.xml");
+        }
+
 
         //Methods
         private void ImportarArticles()
@@ -148,52 +155,68 @@ namespace MiniERP
             else MessageBox.Show("FITXER XML D'ARTICLES NO VÀLID", "Error de validació", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void ImportarComanad()
+        private void ImportarComanada(string xmlFilename)
         {
-            const string RUTA = "comanda.xml";
 
-            string codi;
-            string descripcio;
-            int stock;
+            int id;
+            string codiProv;
+            DateTime data;
+            string codiArt;
+            int quant;
             int preu;
+            bool rebut;
             XmlDocument xml;
-            XmlNodeList xnList;
+            XmlNode xn;
             XmlNodeList xnListArticles;
-
             OdbcCommand cmd;
 
-            if (ValidateXML("comanda.xml", "comanda.xsd"))
+            if (ValidateXML(xmlFilename, "comanda.xsd"))
             {
                 cn.Open(); //Obrir el access
 
                 xml = new XmlDocument();
-                xml.Load(RUTA);
-                xnList = xml.SelectNodes("/comandes/comanda");
-                
+                xml.Load(xmlFilename);
+                xn = xml.SelectSingleNode("/comanda");
                 cmd = new OdbcCommand();
                 cmd.Connection = cn;
 
-                #region Insertar articles
-                foreach (XmlNode xn in xnList)
-                {
-                    //Obtenir les dades
-                    codi = xn["codi"].InnerText;
-                    descripcio = xn["descripcio"].InnerText;
-                    stock = Convert.ToInt32(xn["estoc"].InnerText);
-                    preu = Convert.ToInt32(xn["preu"].InnerText);
+                //Ccomanda  
+                #region Insertar Comanada
+                codiProv = xn["codiProv"].InnerText;
+                data = Convert.ToDateTime(xn["data"].InnerText);
+                xnListArticles = xn.SelectNodes("artices/article");
+                cmd.CommandText = "INSERT INTO ccomanda(codiproveidor, data) VALUES ('" + codiProv + "', '" + data + "');";
+                cmd.ExecuteNonQuery();
+                #endregion 
 
-                    //Insert
-                    cmd.CommandText = "INSERT INTO article VALUES ('" + codi + "','" + descripcio + "'," + stock + "," + preu + ");";
+                //Obtenir el id autonumeric
+                #region Obtenir Id
+                da = new OdbcDataAdapter("SELECT @@identity FROM ccomanda", cn);
+                ds = new DataSet();
+                da.Fill(ds);
+
+                id = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
+                #endregion
+
+                //Dcomanda
+                #region Insertar Articles
+                xnListArticles = xn.SelectNodes("articles/article");
+                foreach (XmlNode xnArt in xnListArticles)
+                {
+                    codiArt = xnArt["codi"].InnerText;
+                    quant = Convert.ToInt32(xnArt["quant"].InnerText);
+                    preu = Convert.ToInt32(xnArt["preu"].InnerText);
+                    rebut = Convert.ToBoolean(xnArt["rebut"].InnerText);
+                    cmd.CommandText = "INSERT INTO dcomanda VALUES ('" + id + "', '" + codiArt + "', " + quant + ", " + preu + ", " + rebut + ");";
                     cmd.ExecuteNonQuery();
                 }
                 #endregion
 
                 cn.Close(); //Tencar el access
-                MessageBox.Show("Importació realitzada correctament", "Importacio correcta");
+                MessageBox.Show("Comanda incorporada correctament", "Incorporació correcta");
             }
             else MessageBox.Show("FITXER XML D'ARTICLES NO VÀLID", "Error de validació", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
+        }       
 
         private bool ValidateXML(string xmlFile, string xsdFile)
         {
@@ -217,6 +240,8 @@ namespace MiniERP
             catch { }
             return isValid;
         }
+
+
 
     }
 }

@@ -77,7 +77,7 @@
             this.incorporarComandaToolStripMenuItem,
             this.recepcionarAlbaràToolStripMenuItem});
             this.importarToolStripMenuItem.Name = "importarToolStripMenuItem";
-            this.importarToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.importarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.importarToolStripMenuItem.Text = "Importar";
             // 
             // articlesToolStripMenuItem1
@@ -99,6 +99,7 @@
             this.incorporarComandaToolStripMenuItem.Name = "incorporarComandaToolStripMenuItem";
             this.incorporarComandaToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.incorporarComandaToolStripMenuItem.Text = "Incorporar Comanda";
+            this.incorporarComandaToolStripMenuItem.Click += new System.EventHandler(this.incorporarComandaToolStripMenuItem_Click);
             // 
             // recepcionarAlbaràToolStripMenuItem
             // 
@@ -114,7 +115,7 @@
             this.articlesPendentsPerProveïdorToolStripMenuItem,
             this.valoracióStockToolStripMenuItem});
             this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
-            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exportarToolStripMenuItem.Text = "Exportar";
             this.exportarToolStripMenuItem.Click += new System.EventHandler(this.exportarToolStripMenuItem_Click);
             // 

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comanda xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="comanda.xsd">
+		<codiProv>BBCP</codiProv>
+		<data>2015-05-19</data>
+		<articles>
+			<article>
+				<codi>AL01</codi>
+				<quant>20</quant> 
+				<preu>73</preu>
+				<rebut>false</rebut> 
+			</article>
+			<article>
+				<codi>BK01</codi>
+				<quant>11</quant>
+				<preu>80</preu>
+				<rebut>false</rebut>
+			</article>
+			<article>
+				<codi>BK02</codi>
+				<quant>33</quant>
+				<preu>8</preu>
+				<rebut>false</rebut>
+			</article>
+			<article>
+				<codi>BL05</codi>
+				<quant>4</quant>
+				<preu>70</preu>
+				<rebut>false</rebut>
+			</article>
+			<article>
+				<codi>BL06</codi>
+				<quant>100</quant>
+				<preu>40</preu>
+				<rebut>false</rebut>
+			</article>
+			<article>
+				<codi>BL07</codi>
+				<quant>13</quant>
+				<preu>47</preu>
+				<rebut>false</rebut>
+			</article>
+			<article>
+				<codi>BS01</codi>
+				<quant>20</quant>
+				<preu>187</preu>
+				<rebut>false</rebut>
+			</article>
+			<article>
+				<codi>BL03</codi>
+				<quant>100</quant>
+				<preu>300</preu>
+				<rebut>false</rebut>
+			</article>
+		</articles>
+</comanda>  
+

@@ -1,0 +1,2 @@
+*Generacio d'errors en importacions
+*Codi referenciat de comanda en Albarans
