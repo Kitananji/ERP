@@ -124,12 +124,15 @@ namespace MiniERP
         }
 
         #endregion
+
+
         //Methods
         #region Importacions
         private void ImportarArticles()
         {
             const string RUTAXML = "articles.xml";
 
+            bool error = false;
             string codi;
             string descripcio;
             int stock;
@@ -149,23 +152,36 @@ namespace MiniERP
                 cmd = new OdbcCommand();
                 cmd.Connection = cn;
 
-                #region Insertar articles
+                #region Insertar articles               
                 foreach (XmlNode xn in xnList)
                 {
                     //Obtenir les dades
                     codi = xn["codi"].InnerText;
-                    descripcio = xn["descripcio"].InnerText;
-                    stock = Convert.ToInt32(xn["estoc"].InnerText);
-                    preu = Convert.ToInt32(xn["preu"].InnerText);
+                    if (ExisteixArticle(codi)) error = true;
+                    else
+                    {
+                        descripcio = xn["descripcio"].InnerText;
+                        stock = Convert.ToInt32(xn["estoc"].InnerText);
+                        preu = Convert.ToInt32(xn["preu"].InnerText);
 
-                    //Insert
-                    cmd.CommandText = "INSERT INTO article VALUES ('" + codi + "','" + descripcio + "'," + stock + "," + preu + ");";
-                    cmd.ExecuteNonQuery();
+                        //Insert
+                        cmd.CommandText = "INSERT INTO article VALUES ('" + codi + "','" + descripcio + "'," + stock + "," + preu + ");";
+                        cmd.ExecuteNonQuery(); 
+                    }
+                                          
                 }
+
+                if (error)
+                {
+                    AfegirError("Importar articles", "Importacio d'articles ja existents");
+                    MessageBox.Show("Hi ha articles que ja existeixen", "Error d'inserció", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else MessageBox.Show("Importació realitzada correctament", "Importacio correcta");   
                 #endregion
+                
 
                 cn.Close(); //Tencar el access
-                MessageBox.Show("Importació realitzada correctament", "Importacio correcta");
+                
             }
             else MessageBox.Show("FITXER XML D'ARTICLES NO VÀLID", "Error de validació", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }     
@@ -174,6 +190,7 @@ namespace MiniERP
         {
             string RUTAXML = "proveidors.xml";
 
+            bool error = false;
             string codi;
             string nom;
             string direccio;
@@ -195,6 +212,7 @@ namespace MiniERP
                 cmd.Connection = cn;
 
                 #region Insertar Proveidors
+
                 foreach (XmlNode xn in xnList)
                 {
                     //obtenim del xml
@@ -204,21 +222,32 @@ namespace MiniERP
                     poble = xn["poblacio"].InnerText;
                     cPostal = xn["cp"].InnerText;
 
-                    //les guardem a access
-                    cmd.CommandText = "INSERT INTO proveidor VALUES ('" + codi + "','" + nom + "','" + direccio + "','" + poble + "','" + cPostal + "');";
-                    cmd.ExecuteNonQuery();
+                    if (ExisteixProveidor(codi)) error = true;
+                    else
+                    {
+                        //Insert
+                        cmd.CommandText = "INSERT INTO proveidor VALUES ('" + codi + "','" + nom + "','" + direccio + "','" + poble + "','" + cPostal + "');";
+                        cmd.ExecuteNonQuery();
+                    }                   
                 }
+
+                if (error)
+                {
+                    AfegirError("Importar proveidors", "Importacio de proveidors ja existent");
+                    MessageBox.Show("Hi ha proveidors que  ja existeixen!", "Error d'inserció", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else MessageBox.Show("Importació realitzada correctament", "Importacio correcta");            
                 #endregion
 
                 cn.Close(); //Tencar el access
-                MessageBox.Show("Importació realitzada correctament", "Importacio correcta");
+                
             }
             else MessageBox.Show("FITXER XML D'ARTICLES NO VÀLID", "Error de validació", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void ImportarComanda(string xmlFilename)
         {
-
+            bool error = false;
             int autonumComanda;
             string codiProv;
             DateTime data;
@@ -241,38 +270,56 @@ namespace MiniERP
                 cmd.Connection = cn;
 
                 //CCOMANDA  
-                #region Insertar Comanda
                 codiProv = xn["codiProv"].InnerText;
-                data = Convert.ToDateTime(xn["data"].InnerText);
-                xnListArticles = xn.SelectNodes("artices/article");
-                cmd.CommandText = "INSERT INTO ccomanda(codiproveidor, data) VALUES ('" + codiProv + "', '" + data + "');";
-                cmd.ExecuteNonQuery();
-                #endregion 
-
-                //Obtenir el id autonumeric
-                autonumComanda = ObtenirId();
-
-                //DCOMANDA
-                #region Insertar Articles
-                xnListArticles = xn.SelectNodes("articles/article");
-                foreach (XmlNode xnArt in xnListArticles)
+                if (!ExisteixProveidor(codiProv))
                 {
-                    codiArt = xnArt["codi"].InnerText;
-                    quant = Convert.ToInt32(xnArt["quant"].InnerText);
-                    preu = Convert.ToInt32(xnArt["preu"].InnerText);
-                    cmd.CommandText = "INSERT INTO dcomanda VALUES ('" + autonumComanda + "', '" + codiArt + "', " + quant + ", " + preu + ", false);";
-                    cmd.ExecuteNonQuery();
+                    AfegirError("Importar comanda", "Importacio comanda amb proveidor inexistent");
+                    MessageBox.Show("Proveidor inexistent", "Error d'inserció", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                #endregion
+                else
+                { 
+                    data = Convert.ToDateTime(xn["data"].InnerText);
+                    xnListArticles = xn.SelectNodes("artices/article");
+                    cmd.CommandText = "INSERT INTO ccomanda(codiproveidor, data) VALUES ('" + codiProv + "', '" + data + "');";
+                    cmd.ExecuteNonQuery();
 
+                    //Obtenir el id autonumeric
+                    autonumComanda = ObtenirId();
+
+                    //DCOMANDA
+                    #region Insertar Articles
+                    xnListArticles = xn.SelectNodes("articles/article");
+                    foreach (XmlNode xnArt in xnListArticles)
+                    {
+                        codiArt = xnArt["codi"].InnerText;
+                        if (!ExisteixArticle(codiArt)) error = true;
+                        else
+                        {
+                            quant = Convert.ToInt32(xnArt["quant"].InnerText);
+                            preu = Convert.ToInt32(xnArt["preu"].InnerText);
+                            cmd.CommandText = "INSERT INTO dcomanda VALUES ('" + autonumComanda + "', '" + codiArt + "', " + quant + ", " + preu + ", false);";
+                            cmd.ExecuteNonQuery();
+                        }
+
+                    }
+
+                    if (error)
+                    {
+                        AfegirError("Importar comanda", "Comanda amb articles no existents");
+                        MessageBox.Show("Un o més articles no existeixen en la comanda", "Error d'incorporació", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else MessageBox.Show("Comanda incorporada correctament", "Incorporació correcta");
+                    #endregion
+                }
                 cn.Close(); //Tencar el access
-                MessageBox.Show("Comanda incorporada correctament", "Incorporació correcta");
+                
             }
             else MessageBox.Show("FITXER XML D'ARTICLES NO VÀLID", "Error de validació", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void IncorporaAlbara(string xmlFilename)
         {
+            bool error = false;
             int autonumAlbara;
             int codiComanda;
             string codiArt;
@@ -296,26 +343,45 @@ namespace MiniERP
 
                 //CALBARA
                 codiComanda = Convert.ToInt32(xn["codiComanda"].InnerText);
-                data = Convert.ToDateTime(xn["data"].InnerText);
-                cmd.CommandText = "INSERT INTO calbara(codicomanda, data) VALUES ('" + codiComanda + "', '" + data + "');";
-                cmd.ExecuteNonQuery();
-
-                autonumAlbara = ObtenirId();
-
-                //DALBARA
-                #region Insertar Articles
-                xnListArticles = xn.SelectNodes("articles/article");
-                foreach (XmlNode xnArt in xnListArticles)
+                if (!ExisteixComanda(codiComanda))
                 {
-                    codiArt = xnArt["codi"].InnerText;
-                    quant = Convert.ToInt32(xnArt["quant"].InnerText);
-                    preu = Convert.ToInt32(xnArt["preu"].InnerText);
-                    cmd.CommandText = "INSERT INTO dalbara VALUES ('" + autonumAlbara + "', '" + codiArt + "', " + quant + ", " + preu + ");";
-                    ActualitzarArticleRebut(codiComanda, codiArt);
-                    AfegirStock(codiArt,quant);
-                    cmd.ExecuteNonQuery();
+                    AfegirError("Incorporacio d'albará", "Albará d'una comanda inexistent");
+                    MessageBox.Show("Aquest albará correspon a una comanda inexistent", "Error d'inserció", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                #endregion
+                else
+                {
+                    data = Convert.ToDateTime(xn["data"].InnerText);
+                    cmd.CommandText = "INSERT INTO calbara(codicomanda, data) VALUES ('" + codiComanda + "', '" + data + "');";
+                    cmd.ExecuteNonQuery();
+
+                    autonumAlbara = ObtenirId();
+
+                    //DALBARA
+                    #region Insertar Articles
+                    xnListArticles = xn.SelectNodes("articles/article");
+                    foreach (XmlNode xnArt in xnListArticles)
+                    {
+                        codiArt = xnArt["codi"].InnerText;
+                        if (!ExisteixArticleEnComanda(codiArt, codiComanda)) error = true;
+                        else
+                        {
+                            quant = Convert.ToInt32(xnArt["quant"].InnerText);
+                            preu = Convert.ToInt32(xnArt["preu"].InnerText);
+                            cmd.CommandText = "INSERT INTO dalbara VALUES ('" + autonumAlbara + "', '" + codiArt + "', " + quant + ", " + preu + ");";
+                            ActualitzarArticleRebut(codiComanda, codiArt);
+                            AfegirStock(codiArt, quant);
+                            cmd.ExecuteNonQuery();
+                        }                      
+                    }
+
+                    if (error)
+                    {
+                        AfegirError("Incorporacio d'albará", "Article no existent en la comanda");
+                        MessageBox.Show("Un o més articles no existeixen en la comanda", "Error d'incorporació", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else MessageBox.Show("Incorporació realitzada correctament", "Incorporació correcta");
+                    #endregion
+                }
                 cn.Close(); //Tencar access
             }
         }
@@ -458,6 +524,50 @@ namespace MiniERP
             return isValid;
         }
 
+        private bool ExisteixArticle(string codiArticle)
+        {
+            bool existeix = true;
+            da = new OdbcDataAdapter("SELECT * FROM article WHERE codi='" + codiArticle +"'", cn);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count == 0) existeix = false;
+            return existeix;
+        }
+
+        private bool ExisteixProveidor(string codiProveidor)
+        {
+            bool existeix = true;
+            da = new OdbcDataAdapter("SELECT * FROM proveidor WHERE codi='" + codiProveidor + "'", cn);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count == 0) existeix = false;
+            return existeix;
+        }
+
+        private bool ExisteixComanda(int codiComanda)
+        {
+            bool existeix = true;
+            da = new OdbcDataAdapter("SELECT * FROM ccomanda WHERE codi=" + codiComanda, cn);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count == 0) existeix = false;
+            return existeix;
+        }
+
+        private bool ExisteixArticleEnComanda(string codiArticle, int codiComanda)
+        {
+            bool existeix = true;
+            da = new OdbcDataAdapter("SELECT * FROM dcomanda WHERE codicomanda=" + codiComanda + " and codiarticle='" + codiArticle + "'", cn);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count == 0) existeix = false;
+            return existeix;
+        }
+
         /*Errors*/
         private void CrearArxiuDerrors()
         {
@@ -507,11 +617,6 @@ namespace MiniERP
 
             docError.Save("errors.xml");
         }
-
-     
-
-       
-
 
     }
 }

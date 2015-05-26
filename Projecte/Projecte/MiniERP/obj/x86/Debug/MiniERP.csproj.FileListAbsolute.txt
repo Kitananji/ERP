@@ -38,3 +38,5 @@ C:\Users\AVT\Documents\GitHub\ERP\Projecte\MiniERP\obj\x86\Debug\MiniERP.csprojR
 C:\Users\AVT\Documents\GitHub\ERP\Projecte\MiniERP\obj\x86\Debug\MiniERP.frmERP.resources
 C:\Users\AVT\Documents\GitHub\ERP\Projecte\MiniERP\obj\x86\Debug\MiniERP.Properties.Resources.resources
 C:\Users\AVT\Documents\GitHub\ERP\Projecte\MiniERP\obj\x86\Debug\MiniERP.csproj.GenerateResource.Cache
+C:\Users\AVT\Desktop\Projecte_\MiniERP\obj\x86\Debug\MiniERP.exe
+C:\Users\AVT\Desktop\Projecte_\MiniERP\obj\x86\Debug\MiniERP.pdb
