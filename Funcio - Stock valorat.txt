@@ -1,0 +1,45 @@
+private void ValoracioStok()
+        {
+            const string VALORACIOSTOK = "StockValorat.xml";
+            
+            int preuTotal=0, preuParcial; //Posem int perquè no tenim decimals
+            DateTime ara = DateTime.Now;
+            
+            da = new OdbcDataAdapter("SELECT * FROM article", cn);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count == 0) MessageBox.Show("Ho hi ha articles per valorar.", "Sense articles", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            else
+            {
+               
+
+                //creem fitxer
+                System.IO.FileStream fs = new FileStream("StockValorat.xml", System.IO.FileMode.OpenOrCreate);
+                System.IO.StreamWriter sw = new StreamWriter(fs);
+                sw.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                sw.WriteLine("<stockValorat xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">");
+                sw.WriteLine("  <articles>");
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    preuParcial = Convert.ToInt32(row[2]) * Convert.ToInt32(row[3]);
+                    preuTotal += preuParcial;
+                    sw.WriteLine("    <article>");
+                    sw.WriteLine("      <codi>" + row[0] + "</codi>");
+                    sw.WriteLine("      <descripcio>" + row[1] + "</descripcio>");
+                    sw.WriteLine("      <estoc>" + row[2] + "</estoc>");
+                    sw.WriteLine("      <preu>" + row[3] + "</preu>");
+                    sw.WriteLine("      <preuParcial>" + preuParcial + "</preuParcial>");
+                    sw.WriteLine("    </article>");
+                }
+                sw.WriteLine("  </articles>");
+                sw.WriteLine("  <preuTotal>"+ preuTotal + "</preuTotal>");
+                sw.WriteLine("  <data>" + Convert.ToString(ara) + "</data>");
+
+                sw.WriteLine("</stockValorat>");
+
+                sw.Close();
+                fs.Close();
+            }
+
+        }
