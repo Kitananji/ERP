@@ -9,19 +9,19 @@
 			<preu>77</preu>
 		</article>
 		<article>
-			<codi>AR04</codi>
+			<codi>BK01</codi>
 			<quant>30</quant>
-			<preu>100</preu>
+			<preu>80</preu>
 		</article>
 		<article>
-			<codi>JU01</codi>
+			<codi>BL06</codi>
 			<quant>5</quant>
-			<preu>250</preu>
+			<preu>40</preu>
 		</article>
 		<article>
-			<codi>JU02</codi>
+			<codi>BL03</codi>
 			<quant>10</quant>
-			<preu>335</preu>
+			<preu>300</preu>
 		</article>
 	</articles>
 </albara>  
