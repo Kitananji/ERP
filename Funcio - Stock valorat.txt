@@ -15,7 +15,7 @@ private void ValoracioStok()
                
 
                 //creem fitxer
-                System.IO.FileStream fs = new FileStream("StockValorat.xml", System.IO.FileMode.OpenOrCreate);
+                System.IO.FileStream fs = new FileStream("StockValorat.xml", System.IO.FileMode.Create);
                 System.IO.StreamWriter sw = new StreamWriter(fs);
                 sw.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
                 sw.WriteLine("<stockValorat xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">");
