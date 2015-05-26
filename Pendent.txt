@@ -1,1 +1,2 @@
 *Generacio d'errors en importacions
+*Estils en llistats

@@ -31,25 +31,10 @@ namespace MiniERP
         }
 
         //Events
-        private void frmERP_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void exportarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void valoracióStockToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        #region Importacions
         private void articlesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            //ImportarArticles();
-            CrearArxiuDerrors();
+            ImportarArticles();
         }
 
         private void proveïdorsToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -65,7 +50,7 @@ namespace MiniERP
             {
                 nomFitxer = openFileDialog1.FileName;
 
-                ImportarComanda(nomFitxer);            
+                ImportarComanda(nomFitxer);
             }
         }
 
@@ -79,8 +64,31 @@ namespace MiniERP
 
                 IncorporaAlbara(nomFitxer);
             }
-            
+
         }
+        #endregion    
+
+        #region Exportacions
+
+        private void articlesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            da = new OdbcDataAdapter("SELECT * FROM article", cn);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count == 0) MessageBox.Show("No hi ha articles per exportar!", "Sense articles", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            else
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    MessageBox.Show("Article: " + row[0]);
+                }
+            }            
+        }
+
+        #endregion
+
 
         //Methods
         private void ImportarArticles()
@@ -356,6 +364,43 @@ namespace MiniERP
             }
             catch { }
             return isValid;
+        }
+
+        private void AfegirError(string proces, string descripcio)
+        {
+            const string FITXERERROR = "errors.xml";
+
+            DateTime ara = DateTime.Now;
+            XmlDocument docError;
+            XmlNode root;
+            XmlElement elem;
+            XmlElement subElement1, subElement2, subElement3;
+
+            //Crear Arxiu d'errors si no existeix
+            if (!System.IO.File.Exists(FITXERERROR)) CrearArxiuDerrors();
+
+            docError = new XmlDocument();
+            docError.Load("errors.xml");
+            
+            root = docError.DocumentElement;
+            elem = docError.CreateElement("error");
+
+            //subnodes
+            subElement1 = docError.CreateElement("proces");
+            subElement1.InnerText = proces;
+
+            subElement2 = docError.CreateElement("data");
+            subElement2.InnerText = Convert.ToString(ara);
+
+            subElement3 = docError.CreateElement("descripcio");
+            subElement3.InnerText = descripcio;
+
+            elem.AppendChild(subElement1);
+            elem.AppendChild(subElement2);
+            elem.AppendChild(subElement3);
+            root.AppendChild(elem);
+
+            docError.Save("errors.xml");
         }
     }
 }

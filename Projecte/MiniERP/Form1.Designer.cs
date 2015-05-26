@@ -46,6 +46,7 @@
             this.estocValoratToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.proveïdorsToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.mnuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -118,7 +119,6 @@
             this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
             this.exportarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exportarToolStripMenuItem.Text = "Exportar";
-            this.exportarToolStripMenuItem.Click += new System.EventHandler(this.exportarToolStripMenuItem_Click);
             // 
             // proveïdorsToolStripMenuItem
             // 
@@ -131,6 +131,7 @@
             this.articlesToolStripMenuItem.Name = "articlesToolStripMenuItem";
             this.articlesToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
             this.articlesToolStripMenuItem.Text = "Articles";
+            this.articlesToolStripMenuItem.Click += new System.EventHandler(this.articlesToolStripMenuItem_Click);
             // 
             // articlesPendentsPerProveïdorToolStripMenuItem
             // 
@@ -143,7 +144,6 @@
             this.valoracióStockToolStripMenuItem.Name = "valoracióStockToolStripMenuItem";
             this.valoracióStockToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
             this.valoracióStockToolStripMenuItem.Text = "Valoració Stock";
-            this.valoracióStockToolStripMenuItem.Click += new System.EventHandler(this.valoracióStockToolStripMenuItem_Click);
             // 
             // llistatsToolStripMenuItem
             // 
@@ -185,6 +185,10 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Fitxer xml (*.xml)|*.xml";
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "Fitxer xml (*.xml)|*.xml";
+            // 
             // frmERP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -194,7 +198,6 @@
             this.MainMenuStrip = this.mnuMain;
             this.Name = "frmERP";
             this.Text = "MINI ERP - A&A paperstore";
-            this.Load += new System.EventHandler(this.frmERP_Load);
             this.mnuMain.ResumeLayout(false);
             this.mnuMain.PerformLayout();
             this.ResumeLayout(false);
@@ -222,6 +225,7 @@
         private System.Windows.Forms.ToolStripMenuItem valoracióStockToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem articlesToolStripMenuItem2;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 
