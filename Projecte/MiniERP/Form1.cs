@@ -48,7 +48,8 @@ namespace MiniERP
 
         private void articlesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            ImportarArticles();
+            //ImportarArticles();
+            CrearArxiuDerrors();
         }
 
         private void proveïdorsToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -68,10 +69,23 @@ namespace MiniERP
             }
         }
 
+        private void recepcionarAlbaràToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string nomFitxer;
+            openFileDialog1.InitialDirectory = Application.StartupPath;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                nomFitxer = openFileDialog1.FileName;
+
+                IncorporaAlbara(nomFitxer);
+            }
+            
+        }
+
         //Methods
         private void ImportarArticles()
         {
-            const string RUTA = "articles.xml";
+            const string RUTAXML = "articles.xml";
 
             string codi;
             string descripcio;
@@ -81,12 +95,12 @@ namespace MiniERP
             XmlNodeList xnList;
             OdbcCommand cmd;
 
-            if (ValidateXML("articles.xml", "articles.xsd"))
+            if (ValidarXML(RUTAXML, "articles.xsd"))
             {
                 cn.Open(); //Obrir el access
 
                 xml = new XmlDocument();
-                xml.Load(RUTA);
+                xml.Load(RUTAXML);
                 xnList = xml.SelectNodes("/articles/article");
 
                 cmd = new OdbcCommand();
@@ -111,20 +125,11 @@ namespace MiniERP
                 MessageBox.Show("Importació realitzada correctament", "Importacio correcta");
             }
             else MessageBox.Show("FITXER XML D'ARTICLES NO VÀLID", "Error de validació", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        private void ActualitzarComandaDeAlbara(string codiCom, string codiArt)
-        {//La connexio ja esta oberta
-            OdbcCommand cmd = new OdbcCommand();
+        }     
 
-            cmd.Connection = cn;
-            cmd.CommandText = "UPDATE dcomanda set rebut=true where codicomanda=" + codiCom + " AND codiarticle =  '" + codiArt + "';";
-
-            cmd.ExecuteNonQuery();
-
-        }
         private void ImportarProveidors()
         {
-            string RUTA = "proveidors.xml";
+            string RUTAXML = "proveidors.xml";
 
             string codi;
             string nom;
@@ -135,12 +140,12 @@ namespace MiniERP
             XmlNodeList xnList;
             OdbcCommand cmd;
 
-            if (ValidateXML("proveidors.xml", "proveidors.xsd"))
+            if (ValidarXML(RUTAXML, "proveidors.xsd"))
             {
                 cn.Open(); //Obrir access
 
                 xml = new XmlDocument();
-                xml.Load(RUTA);
+                xml.Load(RUTAXML);
                 xnList = xml.SelectNodes("/proveidors/proveidor");
 
                 cmd = new OdbcCommand();
@@ -171,7 +176,7 @@ namespace MiniERP
         private void ImportarComanda(string xmlFilename)
         {
 
-            int id;
+            int autonumComanda;
             string codiProv;
             DateTime data;
             string codiArt;
@@ -182,7 +187,7 @@ namespace MiniERP
             XmlNodeList xnListArticles;
             OdbcCommand cmd;
 
-            if (ValidateXML(xmlFilename, "comanda.xsd"))
+            if (ValidarXML(xmlFilename, "comanda.xsd"))
             {
                 cn.Open(); //Obrir el access
 
@@ -192,7 +197,7 @@ namespace MiniERP
                 cmd = new OdbcCommand();
                 cmd.Connection = cn;
 
-                //Ccomanda  
+                //CCOMANDA  
                 #region Insertar Comanda
                 codiProv = xn["codiProv"].InnerText;
                 data = Convert.ToDateTime(xn["data"].InnerText);
@@ -202,23 +207,17 @@ namespace MiniERP
                 #endregion 
 
                 //Obtenir el id autonumeric
-                #region Obtenir Id
-                da = new OdbcDataAdapter("SELECT @@identity FROM ccomanda", cn);
-                ds = new DataSet();
-                da.Fill(ds);
+                autonumComanda = ObtenirId();
 
-                id = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
-                #endregion
-
-                //Dcomanda
+                //DCOMANDA
                 #region Insertar Articles
                 xnListArticles = xn.SelectNodes("articles/article");
                 foreach (XmlNode xnArt in xnListArticles)
                 {
                     codiArt = xnArt["codi"].InnerText;
                     quant = Convert.ToInt32(xnArt["quant"].InnerText);
-                    preu = Convert.ToInt32(xnArt["preu"].InnerText);               
-                    cmd.CommandText = "INSERT INTO dcomanda VALUES ('" + id + "', '" + codiArt + "', " + quant + ", " + preu + ");";
+                    preu = Convert.ToInt32(xnArt["preu"].InnerText);
+                    cmd.CommandText = "INSERT INTO dcomanda VALUES ('" + autonumComanda + "', '" + codiArt + "', " + quant + ", " + preu + ", false);";
                     cmd.ExecuteNonQuery();
                 }
                 #endregion
@@ -227,9 +226,116 @@ namespace MiniERP
                 MessageBox.Show("Comanda incorporada correctament", "Incorporació correcta");
             }
             else MessageBox.Show("FITXER XML D'ARTICLES NO VÀLID", "Error de validació", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }       
+        }
 
-        private bool ValidateXML(string xmlFile, string xsdFile)
+        private void IncorporaAlbara(string xmlFilename)
+        {
+            int autonumAlbara;
+            int codiComanda;
+            string codiArt;
+            int quant;
+            int preu;
+            DateTime data;
+            XmlDocument xml;
+            XmlNode xn;
+            XmlNodeList xnListArticles;
+            OdbcCommand cmd;
+
+            if (ValidarXML(xmlFilename, "albara.xsd"))
+            {
+                cn.Open(); //Obrir el access
+
+                xml = new XmlDocument();
+                xml.Load(xmlFilename);
+                xn = xml.SelectSingleNode("/albara");
+                cmd = new OdbcCommand();
+                cmd.Connection = cn;
+
+                //CALBARA
+                codiComanda = Convert.ToInt32(xn["codiComanda"].InnerText);
+                data = Convert.ToDateTime(xn["data"].InnerText);
+                cmd.CommandText = "INSERT INTO calbara(codicomanda, data) VALUES ('" + codiComanda + "', '" + data + "');";
+                cmd.ExecuteNonQuery();
+
+                autonumAlbara = ObtenirId();
+
+                //DALBARA
+                #region Insertar Articles
+                xnListArticles = xn.SelectNodes("articles/article");
+                foreach (XmlNode xnArt in xnListArticles)
+                {
+                    codiArt = xnArt["codi"].InnerText;
+                    quant = Convert.ToInt32(xnArt["quant"].InnerText);
+                    preu = Convert.ToInt32(xnArt["preu"].InnerText);
+                    cmd.CommandText = "INSERT INTO dalbara VALUES ('" + autonumAlbara + "', '" + codiArt + "', " + quant + ", " + preu + ");";
+                    ActualitzarArticleRebut(codiComanda, codiArt);
+                    AfegirStock(codiArt,quant);
+                    cmd.ExecuteNonQuery();
+                }
+                #endregion
+                cn.Close(); //Tencar access
+            }
+        }
+
+        private void CrearArxiuDerrors()
+        {
+            System.IO.FileStream fs = new FileStream("errors.xml", System.IO.FileMode.Create);
+            System.IO.StreamWriter sw = new StreamWriter(fs);
+            sw.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            sw.WriteLine("<errors xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"articles.xsd\">");
+            sw.WriteLine("</errors>");
+            sw.Close();
+            fs.Close();
+
+        }
+
+        private void ActualitzarArticleRebut(int codiCom, string codiArt)
+        {//La connexio ja esta oberta
+            OdbcCommand cmd = new OdbcCommand();
+
+            cmd.Connection = cn;
+            cmd.CommandText = "UPDATE dcomanda set rebut=true where codicomanda=" + codiCom + " AND codiarticle =  '" + codiArt + "';";
+
+            cmd.ExecuteNonQuery();
+
+        }
+
+        private int ObtenirId()
+        {
+            int id;
+            da = new OdbcDataAdapter("SELECT @@identity FROM ccomanda", cn);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            id = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
+            return id;
+        }
+
+        private int StockActual(string codiarticle)
+        {
+            int stock;
+            da = new OdbcDataAdapter("SELECT estoc FROM article WHERE codi='" + codiarticle + "';", cn);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            stock = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
+            return stock;
+        }
+
+        private void AfegirStock(string codiarticle, int afegir)
+        {
+            int stockAfegit;
+            OdbcCommand cmd = new OdbcCommand();
+
+            stockAfegit = StockActual(codiarticle) + afegir;
+
+            cmd.Connection = cn;
+            cmd.CommandText = "UPDATE article set estoc=" + stockAfegit + " where codi='" + codiarticle + "';";
+
+            cmd.ExecuteNonQuery();
+        }
+
+        private bool ValidarXML(string xmlFile, string xsdFile)
         {
 
             bool isValid = false;
@@ -251,16 +357,6 @@ namespace MiniERP
             catch { }
             return isValid;
         }
-
-        private void recepcionarAlbaràToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            cn.Open();
-            ActualitzarComandaDeAlbara("1", "AR04");
-            cn.Close();
-        }
-
-
-
     }
 }
 
