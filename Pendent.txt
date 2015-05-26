@@ -1,3 +1,1 @@
 *Generacio d'errors en importacions
-*Codi referenciat de comanda en Albarans
-*Albara: actualitzar stock d'articles i posar rebut a true
