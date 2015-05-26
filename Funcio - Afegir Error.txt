@@ -1,0 +1,29 @@
+        private void AfegirError(string proces, string descripcio)
+        {
+            
+             DateTime ara = DateTime.Now;
+
+
+            XmlDocument docError = new XmlDocument();
+            docError.Load("errors.xml");
+
+            XmlNode root = docError.DocumentElement;
+            XmlElement elem = docError.CreateElement("error");
+
+            //subnodes
+            XmlElement subElement1 = docError.CreateElement("proces");
+            subElement1.InnerText = proces;
+            XmlElement subElement2 = docError.CreateElement("data");
+            subElement2.InnerText = Convert.ToString(ara);
+            XmlElement subElement3 = docError.CreateElement("descripcio");
+            subElement3.InnerText = descripcio;
+
+            elem.AppendChild(subElement1);
+            elem.AppendChild(subElement2);
+            elem.AppendChild(subElement3);
+
+            root.AppendChild(elem);
+
+            docError.Save("errors.xml");
+            
+        }
