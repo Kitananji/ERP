@@ -69,28 +69,63 @@ namespace MiniERP
         #endregion    
 
         #region Exportacions
-
         private void articlesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            da = new OdbcDataAdapter("SELECT * FROM article", cn);
-            ds = new DataSet();
-            da.Fill(ds);
-
-            if (ds.Tables[0].Rows.Count == 0) MessageBox.Show("No hi ha articles per exportar!", "Sense articles", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            else
+            string nomFitxer;
+            saveFileDialog1.FileName = "articles.xml"; 
+            saveFileDialog1.InitialDirectory = Application.StartupPath;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                foreach (DataRow row in ds.Tables[0].Rows)
-                {
-                    MessageBox.Show("Article: " + row[0]);
-                }
-            }            
+                nomFitxer = saveFileDialog1.FileName;
+                ExportarArticles(nomFitxer);
+            }
+        }
+
+        private void proveïdorsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string nomFitxer;
+            saveFileDialog1.FileName = "proveidors.xml"; 
+            saveFileDialog1.InitialDirectory = Application.StartupPath;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                nomFitxer = saveFileDialog1.FileName;
+                ExportarProveidors(nomFitxer);
+            }
+        }
+        #endregion
+
+        #region LListats
+        private void articlesToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            string nomFitxer;
+            saveFileDialog1.FileName = "articles.xml";
+            saveFileDialog1.InitialDirectory = Application.StartupPath;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                nomFitxer = saveFileDialog1.FileName;
+                ExportarArticles(nomFitxer);
+
+                System.Diagnostics.Process.Start("IExplore.exe", nomFitxer);
+            }
+        }
+
+        private void proveïdorsToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            string nomFitxer;
+            saveFileDialog1.FileName = "proveidors.xml";
+            saveFileDialog1.InitialDirectory = Application.StartupPath;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                nomFitxer = saveFileDialog1.FileName;
+                ExportarProveidors(nomFitxer);
+
+                System.Diagnostics.Process.Start("IExplore.exe", nomFitxer);
+            }
         }
 
         #endregion
-
-
         //Methods
+        #region Importacions
         private void ImportarArticles()
         {
             const string RUTAXML = "articles.xml";
@@ -284,17 +319,85 @@ namespace MiniERP
                 cn.Close(); //Tencar access
             }
         }
+        #endregion
 
-        private void CrearArxiuDerrors()
+        #region Exportacions
+        private void ExportarArticles(string filename)
         {
-            System.IO.FileStream fs = new FileStream("errors.xml", System.IO.FileMode.Create);
-            System.IO.StreamWriter sw = new StreamWriter(fs);
-            sw.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            sw.WriteLine("<errors xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"articles.xsd\">");
-            sw.WriteLine("</errors>");
-            sw.Close();
-            fs.Close();
+            System.IO.FileStream fs;
+            System.IO.StreamWriter sw;
 
+            da = new OdbcDataAdapter("SELECT * FROM article", cn);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count == 0) MessageBox.Show("No hi ha articles per exportar!", "Sense articles", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            else
+            {
+                fs = new FileStream(filename, System.IO.FileMode.OpenOrCreate);
+                sw = new StreamWriter(fs);
+                sw.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                sw.WriteLine("<articles xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"articles.xsd\">");
+               
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    sw.WriteLine("  <article>");
+                    sw.WriteLine("      <codi>" + row[0] + "</codi>");
+                    sw.WriteLine("      <descripcio>" + row[1] + "</descripcio>");
+                    sw.WriteLine("      <estoc>" + row[2] + "</estoc>");
+                    sw.WriteLine("      <preu>" + row[3] + "</preu>");
+                    sw.WriteLine("  </article>");
+                }
+                sw.WriteLine("</articles>");
+                sw.Close();
+                fs.Close();
+            }          
+        }
+
+        private void ExportarProveidors(string filename)
+        {
+            System.IO.FileStream fs;
+            System.IO.StreamWriter sw;
+
+            da = new OdbcDataAdapter("SELECT * FROM proveidor", cn);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count == 0) MessageBox.Show("No hi ha proveidors per exportar!", "Sense proveidors", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            else
+            {
+                fs = new FileStream(filename, System.IO.FileMode.OpenOrCreate);
+                sw = new StreamWriter(fs);
+                sw.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                sw.WriteLine("<proveidors xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"proveidors.xsd\">");
+
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    sw.WriteLine("  <proveidor>");
+                    sw.WriteLine("      <codi>" + row[0] + "</codi>");
+                    sw.WriteLine("      <nom>" + row[1] + "</nom>");
+                    sw.WriteLine("      <adreça>" + row[2] + "</adreça>");
+                    sw.WriteLine("      <poblacio>" + row[3] + "</poblacio>");
+                    sw.WriteLine("      <cp>" + row[4] + "</cp>");
+                    sw.WriteLine("  </proveidor>");
+                }
+                sw.WriteLine("</proveidors>");
+                sw.Close();
+                fs.Close();
+            }
+        }
+        #endregion
+
+
+        private int ObtenirId()
+        {
+            int id;
+            da = new OdbcDataAdapter("SELECT @@identity FROM ccomanda", cn);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            id = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
+            return id;
         }
 
         private void ActualitzarArticleRebut(int codiCom, string codiArt)
@@ -306,17 +409,6 @@ namespace MiniERP
 
             cmd.ExecuteNonQuery();
 
-        }
-
-        private int ObtenirId()
-        {
-            int id;
-            da = new OdbcDataAdapter("SELECT @@identity FROM ccomanda", cn);
-            ds = new DataSet();
-            da.Fill(ds);
-
-            id = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
-            return id;
         }
 
         private int StockActual(string codiarticle)
@@ -366,6 +458,19 @@ namespace MiniERP
             return isValid;
         }
 
+        /*Errors*/
+        private void CrearArxiuDerrors()
+        {
+            System.IO.FileStream fs = new FileStream("errors.xml", System.IO.FileMode.Create);
+            System.IO.StreamWriter sw = new StreamWriter(fs);
+            sw.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            sw.WriteLine("<errors xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"articles.xsd\">");
+            sw.WriteLine("</errors>");
+            sw.Close();
+            fs.Close();
+
+        }
+
         private void AfegirError(string proces, string descripcio)
         {
             const string FITXERERROR = "errors.xml";
@@ -385,7 +490,7 @@ namespace MiniERP
             root = docError.DocumentElement;
             elem = docError.CreateElement("error");
 
-            //subnodes
+            //Subnodes
             subElement1 = docError.CreateElement("proces");
             subElement1.InnerText = proces;
 
@@ -402,6 +507,12 @@ namespace MiniERP
 
             docError.Save("errors.xml");
         }
+
+     
+
+       
+
+
     }
 }
 
