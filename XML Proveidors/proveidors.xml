@@ -2,7 +2,7 @@
 <proveidors xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="proveidors.xsd">
 <proveidor>
 	<codi>CP10</codi>
-	<nom>Comercial paperera, materials d'ificina</nom>
+	<nom>Comercial paperera, materials doficina</nom>
 	<adreça>Pol. Ind Mas Xirgu II</adreça>
 	<poblacio>Girona</poblacio>
 	<cp>17005</cp>
@@ -25,7 +25,7 @@
 	<codi>BBCP</codi>
 	<nom>Bisbal Copy</nom>
 	<adreça>C/Solidaritat, 40</adreça>
-	<poblacio>La Bisbal d'Empordà</poblacio>
+	<poblacio>La Bisbal dEmpordà</poblacio>
 	<cp>17100</cp>
 </proveidor>
 <proveidor>

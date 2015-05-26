@@ -40,3 +40,11 @@ C:\Users\AVT\Documents\GitHub\ERP\Projecte\MiniERP\obj\x86\Debug\MiniERP.Propert
 C:\Users\AVT\Documents\GitHub\ERP\Projecte\MiniERP\obj\x86\Debug\MiniERP.csproj.GenerateResource.Cache
 C:\Users\AVT\Desktop\Projecte_\MiniERP\obj\x86\Debug\MiniERP.exe
 C:\Users\AVT\Desktop\Projecte_\MiniERP\obj\x86\Debug\MiniERP.pdb
+K:\Documents\GitHub\ERP\Projecte\Projecte\MiniERP\obj\x86\Debug\MiniERP.exe
+K:\Documents\GitHub\ERP\Projecte\Projecte\MiniERP\obj\x86\Debug\MiniERP.pdb
+K:\Documents\GitHub\ERP\Projecte\Projecte\MiniERP\bin\Debug\MiniERP.exe
+K:\Documents\GitHub\ERP\Projecte\Projecte\MiniERP\bin\Debug\MiniERP.pdb
+K:\Documents\GitHub\ERP\Projecte\Projecte\MiniERP\obj\x86\Debug\MiniERP.csprojResolveAssemblyReference.cache
+K:\Documents\GitHub\ERP\Projecte\Projecte\MiniERP\obj\x86\Debug\MiniERP.frmERP.resources
+K:\Documents\GitHub\ERP\Projecte\Projecte\MiniERP\obj\x86\Debug\MiniERP.Properties.Resources.resources
+K:\Documents\GitHub\ERP\Projecte\Projecte\MiniERP\obj\x86\Debug\MiniERP.csproj.GenerateResource.Cache

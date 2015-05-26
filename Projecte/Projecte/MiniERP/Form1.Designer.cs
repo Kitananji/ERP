@@ -138,12 +138,14 @@
             this.articlesPendentsPerProveïdorToolStripMenuItem.Name = "articlesPendentsPerProveïdorToolStripMenuItem";
             this.articlesPendentsPerProveïdorToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
             this.articlesPendentsPerProveïdorToolStripMenuItem.Text = "Articles Pendents Per Proveïdor";
+            this.articlesPendentsPerProveïdorToolStripMenuItem.Click += new System.EventHandler(this.articlesPendentsPerProveïdorToolStripMenuItem_Click);
             // 
             // valoracióStockToolStripMenuItem
             // 
             this.valoracióStockToolStripMenuItem.Name = "valoracióStockToolStripMenuItem";
             this.valoracióStockToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
             this.valoracióStockToolStripMenuItem.Text = "Valoració Stock";
+            this.valoracióStockToolStripMenuItem.Click += new System.EventHandler(this.valoracióStockToolStripMenuItem_Click);
             // 
             // llistatsToolStripMenuItem
             // 
@@ -167,12 +169,14 @@
             this.articlesPendentsDeRebreToolStripMenuItem.Name = "articlesPendentsDeRebreToolStripMenuItem";
             this.articlesPendentsDeRebreToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.articlesPendentsDeRebreToolStripMenuItem.Text = "Articles Pendents De Rebre";
+            this.articlesPendentsDeRebreToolStripMenuItem.Click += new System.EventHandler(this.articlesPendentsDeRebreToolStripMenuItem_Click);
             // 
             // estocValoratToolStripMenuItem
             // 
             this.estocValoratToolStripMenuItem.Name = "estocValoratToolStripMenuItem";
             this.estocValoratToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.estocValoratToolStripMenuItem.Text = "Estoc Valorat";
+            this.estocValoratToolStripMenuItem.Click += new System.EventHandler(this.estocValoratToolStripMenuItem_Click);
             // 
             // proveïdorsToolStripMenuItem2
             // 

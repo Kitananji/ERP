@@ -92,6 +92,32 @@ namespace MiniERP
                 ExportarProveidors(nomFitxer);
             }
         }
+
+        private void articlesPendentsPerProveïdorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string nomFitxer;
+            saveFileDialog1.FileName = "articlesPendents.xml";
+            saveFileDialog1.InitialDirectory = Application.StartupPath;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                nomFitxer = saveFileDialog1.FileName;
+                ExportarArticlesPendents(nomFitxer);
+            }
+        }
+
+        private void valoracióStockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string nomFitxer;
+            saveFileDialog1.FileName = "valoracioStock.xml";
+            saveFileDialog1.InitialDirectory = Application.StartupPath;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                nomFitxer = saveFileDialog1.FileName;
+                ValoracioStok(nomFitxer);
+            }
+            
+        }
+
         #endregion
 
         #region LListats
@@ -123,6 +149,31 @@ namespace MiniERP
             }
         }
 
+        private void articlesPendentsDeRebreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string nomFitxer;
+            saveFileDialog1.FileName = "articlesPendents.xml";
+            saveFileDialog1.InitialDirectory = Application.StartupPath;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                nomFitxer = saveFileDialog1.FileName;
+                ExportarArticlesPendents(nomFitxer);
+                System.Diagnostics.Process.Start("IExplore.exe", nomFitxer);
+            }
+        }
+
+        private void estocValoratToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string nomFitxer;
+            saveFileDialog1.FileName = "valoracioStock.xml";
+            saveFileDialog1.InitialDirectory = Application.StartupPath;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                nomFitxer = saveFileDialog1.FileName;
+                ValoracioStok(nomFitxer);
+                System.Diagnostics.Process.Start("IExplore.exe", nomFitxer);
+            }          
+        }
         #endregion
 
 
@@ -400,7 +451,7 @@ namespace MiniERP
             if (ds.Tables[0].Rows.Count == 0) MessageBox.Show("No hi ha articles per exportar!", "Sense articles", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             else
             {
-                fs = new FileStream(filename, System.IO.FileMode.OpenOrCreate);
+                fs = new FileStream(filename, System.IO.FileMode.Create);
                 sw = new StreamWriter(fs);
                 sw.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
                 sw.WriteLine("<articles xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"articles.xsd\">");
@@ -432,7 +483,7 @@ namespace MiniERP
             if (ds.Tables[0].Rows.Count == 0) MessageBox.Show("No hi ha proveidors per exportar!", "Sense proveidors", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             else
             {
-                fs = new FileStream(filename, System.IO.FileMode.OpenOrCreate);
+                fs = new FileStream(filename, System.IO.FileMode.Create);
                 sw = new StreamWriter(fs);
                 sw.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
                 sw.WriteLine("<proveidors xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"proveidors.xsd\">");
@@ -451,6 +502,106 @@ namespace MiniERP
                 sw.Close();
                 fs.Close();
             }
+        }
+
+        private void ExportarArticlesPendents(string filename)
+        {
+            int codiComanda;
+            string codiProveidor;
+            System.IO.FileStream fs;
+            System.IO.StreamWriter sw;
+            DateTime ara = DateTime.Now;
+            DataSet dsDcomanda;
+            if (!ArticlesPendents()) MessageBox.Show("No hi ha articles pendents.", "Sense pendents", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+            {
+                fs = new FileStream(filename, System.IO.FileMode.Create);
+                sw = new StreamWriter(fs);
+                sw.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                sw.WriteLine("<pendentComanda xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">");
+
+
+                da = new OdbcDataAdapter("SELECT * FROM ccomanda", cn);
+                ds = new DataSet();
+                da.Fill(ds);
+
+                foreach (DataRow rowC in ds.Tables[0].Rows)
+                {
+                    codiComanda = Convert.ToInt32(rowC[0]);
+
+                    if (ArticlesPendents(codiComanda))
+                    {
+                        codiProveidor = rowC[1].ToString();
+
+                        sw.WriteLine("  <comanda>");
+                        sw.WriteLine("      <codi>" + codiComanda + "</codi>");
+                        sw.WriteLine("      <codiProv>" + codiProveidor + "</codiProv>");
+                        sw.WriteLine("      <articles>");
+
+                        da = new OdbcDataAdapter("SELECT * FROM dcomanda WHERE codicomanda=" + codiComanda + " and rebut=false", cn);
+                        dsDcomanda = new DataSet();
+                        da.Fill(dsDcomanda);
+
+                        foreach (DataRow rowA in dsDcomanda.Tables[0].Rows)
+                        {
+                            sw.WriteLine("        <article>");
+                            sw.WriteLine("          <codi>" + rowA[1] + "</codi>");
+                            sw.WriteLine("        </article>");
+                        }
+                        sw.WriteLine("      </articles>");
+                        sw.WriteLine("  </comanda>");
+                    }
+                }
+                sw.WriteLine("  <dataInforme>" + Convert.ToString(ara) + "</dataInforme>");
+                sw.WriteLine("</pendentComanda>");
+
+                sw.Close();
+                fs.Close();
+            }
+        }
+
+        private void ValoracioStok(string filename)
+        {
+
+            int preuTotal = 0, preuParcial; //Posem int perquè no tenim decimals
+            DateTime ara = DateTime.Now;
+            System.IO.FileStream fs;
+            System.IO.StreamWriter sw;
+            da = new OdbcDataAdapter("SELECT * FROM article", cn);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count == 0) MessageBox.Show("No hi ha articles per valorar.", "Sense articles", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            else
+            {
+                //creem fitxer
+                fs = new FileStream(filename, System.IO.FileMode.Create);
+                sw = new StreamWriter(fs);
+                sw.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                sw.WriteLine("<stockValorat xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">");
+                sw.WriteLine("  <articles>");
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    preuParcial = Convert.ToInt32(row[2]) * Convert.ToInt32(row[3]);
+                    preuTotal += preuParcial;
+                    sw.WriteLine("    <article>");
+                    sw.WriteLine("      <codi>" + row[0] + "</codi>");
+                    sw.WriteLine("      <descripcio>" + row[1] + "</descripcio>");
+                    sw.WriteLine("      <estoc>" + row[2] + "</estoc>");
+                    sw.WriteLine("      <preu>" + row[3] + "</preu>");
+                    sw.WriteLine("      <preuParcial>" + preuParcial + "</preuParcial>");
+                    sw.WriteLine("    </article>");
+                }
+                sw.WriteLine("  </articles>");
+                sw.WriteLine("  <preuTotal>" + preuTotal + "</preuTotal>");
+                sw.WriteLine("  <data>" + Convert.ToString(ara) + "</data>");
+
+                sw.WriteLine("</stockValorat>");
+
+                sw.Close();
+                fs.Close();
+            }
+
         }
         #endregion
 
@@ -568,13 +719,36 @@ namespace MiniERP
             return existeix;
         }
 
+        private bool ArticlesPendents()
+        {
+            bool pendents = true;
+            da = new OdbcDataAdapter("SELECT * FROM dcomanda WHERE rebut=false", cn);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count == 0) pendents = false;
+            return pendents;
+        }
+
+        private bool ArticlesPendents(int codiComanda)
+        {
+            bool pendents = true;
+            da = new OdbcDataAdapter("SELECT * FROM dcomanda WHERE codicomanda=" + codiComanda + " and rebut=false", cn);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count == 0) pendents = false;
+            return pendents;
+        }
+       
+
         /*Errors*/
         private void CrearArxiuDerrors()
         {
             System.IO.FileStream fs = new FileStream("errors.xml", System.IO.FileMode.Create);
             System.IO.StreamWriter sw = new StreamWriter(fs);
             sw.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            sw.WriteLine("<errors xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"articles.xsd\">");
+            sw.WriteLine("<errors xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">");
             sw.WriteLine("</errors>");
             sw.Close();
             fs.Close();
@@ -617,6 +791,8 @@ namespace MiniERP
 
             docError.Save("errors.xml");
         }
+
+
 
     }
 }
