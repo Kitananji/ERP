@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<comanda xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="comanda.xsd">
+		<codiProv>MSS1</codiProv>
+		<data>2015-05-21</data>
+		<articles>
+			<article>
+				<codi>AL01</codi>
+				<quant>10</quant> 
+				<preu>77</preu>
+			</article>
+			<article>
+				<codi>AR04</codi>
+				<quant>30</quant>
+				<preu>100</preu>
+			</article>
+			<article> 
+				<codi>JU01</codi>
+				<quant>5</quant>
+				<preu>250</preu>
+			</article>
+			<article>
+				<codi>JU02</codi>
+				<quant>10</quant>
+				<preu>335</preu>
+			</article>
+			<article>
+				<codi>JU03</codi>
+				<quant>6</quant>
+				<preu>1800</preu>
+			</article>
+			<article>
+				<codi>TA03</codi>
+				<quant>2</quant>
+				<preu>400</preu>
+			</article>
+			<article>
+				<codi>BK01</codi>
+				<quant>20</quant>
+				<preu>75</preu>
+			</article>
+			<article>
+				<codi>BL04</codi>
+				<quant>7</quant>
+				<preu>80</preu>
+			</article>
+		</articles>
+</comanda>  

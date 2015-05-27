@@ -6,10 +6,6 @@
       <codiProv>MSS1</codiProv>
       <articles>
         <article>
-          <codi>AL01</codi>
-          <quant>10</quant>
-        </article>
-        <article>
           <codi>AR04</codi>
           <quant>30</quant>
         </article>
@@ -30,10 +26,6 @@
           <quant>2</quant>
         </article>
         <article>
-          <codi>BK01</codi>
-          <quant>20</quant>
-        </article>
-        <article>
           <codi>BL04</codi>
           <quant>7</quant>
         </article>
@@ -49,5 +41,5 @@
         </article>
       </articles>
   </comanda>
-  <dataInforme>27/05/2015 6:31:40</dataInforme>
+  <dataInforme>27/05/2015 5:32:22</dataInforme>
 </pendentComanda>

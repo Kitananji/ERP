@@ -1,28 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<errors xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="articles.xsd">
-  <error>
-    <proces>Incorporacio d'albará</proces>
-    <data>27/05/2015 10:22:13</data>
-    <descripcio>Albará d'una comanda inexistent</descripcio>
-  </error>
-  <error>
-    <proces>Incorporacio d'albará</proces>
-    <data>27/05/2015 10:22:26</data>
-    <descripcio>Albará d'una comanda inexistent</descripcio>
-  </error>
+<errors xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <error>
     <proces>Importar articles</proces>
-    <data>27/05/2015 10:24:02</data>
+    <data>27/05/2015 6:32:05</data>
     <descripcio>Importacio d'articles ja existents</descripcio>
   </error>
   <error>
     <proces>Importar proveidors</proces>
-    <data>27/05/2015 10:24:05</data>
+    <data>27/05/2015 6:32:18</data>
     <descripcio>Importacio de proveidors ja existent</descripcio>
-  </error>
-  <error>
-    <proces>Incorporacio d'albará</proces>
-    <data>27/05/2015 3:27:40</data>
-    <descripcio>Article no existent en la comanda</descripcio>
   </error>
 </errors>
