@@ -72,14 +72,14 @@ namespace MiniERP
         private void articlesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             const string FILENAME = "EXP-Articles.xml";
-            ExportarArticles(FILENAME);
+            if (ExportarArticles(FILENAME)) MessageBox.Show("Articles exportats correctament al fitxer " + FILENAME, "Exportacio correcta");
         }
 
         private void proveïdorsToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             const string FILENAME = "EXP-Proveidors.xml";
 
-            ExportarProveidors(FILENAME);
+            if (ExportarProveidors(FILENAME)) MessageBox.Show("Proveidors exportats correctament al fitxer " + FILENAME, "Exportacio correcta");
 
         }
 
@@ -87,7 +87,7 @@ namespace MiniERP
         {
             const string FILENAME = "EXP-ArticlesPendents.xml";
 
-            ExportarArticlesPendents(FILENAME);
+            if (ExportarArticlesPendents(FILENAME)) MessageBox.Show("Articles pendents exportats correctament al fitxer " + FILENAME, "Exportacio correcta");
 
         }
 
@@ -95,7 +95,7 @@ namespace MiniERP
         {
             const string FILENAME = "EXP-ValoracioStock.xml";
 
-             ValoracioStok(FILENAME);
+            if (ValoracioStok(FILENAME)) MessageBox.Show("Valoració d'estock exportada correctament al fitxer " + FILENAME, "Exportacio correcta");
 
         }
 
@@ -106,8 +106,7 @@ namespace MiniERP
         {
             const string FILENAME = "EXP-Articles.xml";
 
-            ExportarArticles(FILENAME);
-            System.Diagnostics.Process.Start("Firefox.exe", FILENAME);
+            if(ExportarArticles(FILENAME)) System.Diagnostics.Process.Start("Firefox.exe", FILENAME);
             
         }
        
@@ -115,8 +114,7 @@ namespace MiniERP
         {
            const string FILENAME = "EXP-Proveidors.xml";
 
-           ExportarProveidors(FILENAME);
-           System.Diagnostics.Process.Start("Firefox.exe", FILENAME);
+           if(ExportarProveidors(FILENAME)) System.Diagnostics.Process.Start("Firefox.exe", FILENAME);
             
         }
 
@@ -124,8 +122,7 @@ namespace MiniERP
         {
             const string FILENAME = "EXP-ArticlesPendents.xml";
 
-            ExportarArticlesPendents(FILENAME);
-            System.Diagnostics.Process.Start("Firefox.exe", FILENAME);
+            if(ExportarArticlesPendents(FILENAME)) System.Diagnostics.Process.Start("Firefox.exe", FILENAME);
             
         }
 
@@ -133,8 +130,7 @@ namespace MiniERP
         {
             const string FILENAME = "EXP-ValoracioStock.xml";
 
-            ValoracioStok(FILENAME);
-            System.Diagnostics.Process.Start("Firefox.exe", FILENAME);
+            if(ValoracioStok(FILENAME)) System.Diagnostics.Process.Start("Firefox.exe", FILENAME);
          
         }
         #endregion
@@ -402,8 +398,9 @@ namespace MiniERP
         #endregion
 
         #region Exportacions
-        private void ExportarArticles(string filename)
+        private bool ExportarArticles(string filename)
         {
+            bool exportat = true;
             System.IO.FileStream fs;
             System.IO.StreamWriter sw;
 
@@ -411,7 +408,11 @@ namespace MiniERP
             ds = new DataSet();
             da.Fill(ds);
 
-            if (ds.Tables[0].Rows.Count == 0) MessageBox.Show("No hi ha articles per exportar!", "Sense articles", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            if (ds.Tables[0].Rows.Count == 0) 
+            {
+                MessageBox.Show("No hi ha articles per exportar!", "Sense articles", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                exportat = false;
+            }               
             else
             {
                 fs = new FileStream(filename, System.IO.FileMode.Create);
@@ -432,11 +433,13 @@ namespace MiniERP
                 sw.WriteLine("</articles>");
                 sw.Close();
                 fs.Close();
-            }          
+            }
+            return exportat;
         }
 
-        private void ExportarProveidors(string filename)
+        private bool ExportarProveidors(string filename)
         {
+            bool exportat = true;
             System.IO.FileStream fs;
             System.IO.StreamWriter sw;
 
@@ -444,7 +447,11 @@ namespace MiniERP
             ds = new DataSet();
             da.Fill(ds);
 
-            if (ds.Tables[0].Rows.Count == 0) MessageBox.Show("No hi ha proveidors per exportar!", "Sense proveidors", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            if (ds.Tables[0].Rows.Count == 0) 
+            {
+                exportat = false;
+                MessageBox.Show("No hi ha proveidors per exportar!", "Sense proveidors", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
             else
             {
                 fs = new FileStream(filename, System.IO.FileMode.Create);
@@ -467,17 +474,23 @@ namespace MiniERP
                 sw.Close();
                 fs.Close();
             }
+            return exportat;
         }
 
-        private void ExportarArticlesPendents(string filename)
+        private bool ExportarArticlesPendents(string filename)
         {
+            bool exportat = true;
             int codiComanda;
             string codiProveidor;
             System.IO.FileStream fs;
             System.IO.StreamWriter sw;
             DateTime ara = DateTime.Now;
             DataSet dsDcomanda;
-            if (!ArticlesPendents()) MessageBox.Show("No hi ha articles pendents.", "Sense pendents", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (!ArticlesPendents()) 
+            {
+                exportat = false;
+                MessageBox.Show("No hi ha articles pendents.", "Sense pendents", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             else
             {
                 fs = new FileStream(filename, System.IO.FileMode.Create);
@@ -525,11 +538,12 @@ namespace MiniERP
                 sw.Close();
                 fs.Close();
             }
+            return exportat;
         }
 
-        private void ValoracioStok(string filename)
+        private bool ValoracioStok(string filename)
         {
-
+            bool exportat = true;
             int preuTotal = 0, preuParcial; //Posem int perquè no tenim decimals
             DateTime ara = DateTime.Now;
             System.IO.FileStream fs;
@@ -538,7 +552,11 @@ namespace MiniERP
             ds = new DataSet();
             da.Fill(ds);
 
-            if (ds.Tables[0].Rows.Count == 0) MessageBox.Show("No hi ha articles per valorar.", "Sense articles", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            if (ds.Tables[0].Rows.Count == 0) 
+            {
+                exportat = false;
+                MessageBox.Show("No hi ha articles per valorar.", "Sense articles", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);           
+            }
             else
             {
                 //creem fitxer
@@ -569,7 +587,7 @@ namespace MiniERP
                 sw.Close();
                 fs.Close();
             }
-
+            return exportat;
         }
         #endregion
 
