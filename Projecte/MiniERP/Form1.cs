@@ -124,7 +124,7 @@ namespace MiniERP
         private void articlesToolStripMenuItem2_Click_1(object sender, EventArgs e)
         {
             string nomFitxer;
-            saveFileDialog1.FileName = "articles.xml";
+            saveFileDialog1.FileName = "EXP-Articles.xml";
             saveFileDialog1.InitialDirectory = Application.StartupPath;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -138,7 +138,7 @@ namespace MiniERP
         private void proveïdorsToolStripMenuItem2_Click_1(object sender, EventArgs e)
         {
             string nomFitxer;
-            saveFileDialog1.FileName = "proveidors.xml";
+            saveFileDialog1.FileName = "EXP-Proveidors.xml";
             saveFileDialog1.InitialDirectory = Application.StartupPath;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -152,7 +152,7 @@ namespace MiniERP
         private void articlesPendentsDeRebreToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string nomFitxer;
-            saveFileDialog1.FileName = "articlesPendents.xml";
+            saveFileDialog1.FileName = "EXP-ArticlesPendents.xml";
             saveFileDialog1.InitialDirectory = Application.StartupPath;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -165,7 +165,7 @@ namespace MiniERP
         private void estocValoratToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string nomFitxer;
-            saveFileDialog1.FileName = "valoracioStock.xml";
+            saveFileDialog1.FileName = "EXP-ValoracioStock.xml";
             saveFileDialog1.InitialDirectory = Application.StartupPath;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -679,6 +679,30 @@ namespace MiniERP
             return isValid;
         }
 
+        private bool ArticlesPendents()
+        {
+            bool pendents = true;
+            da = new OdbcDataAdapter("SELECT * FROM dcomanda WHERE rebut=false", cn);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count == 0) pendents = false;
+            return pendents;
+        }
+
+        private bool ArticlesPendents(int codiComanda)
+        {
+            bool pendents = true;
+            da = new OdbcDataAdapter("SELECT * FROM dcomanda WHERE codicomanda=" + codiComanda + " and rebut=false", cn);
+            ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count == 0) pendents = false;
+            return pendents;
+        }
+       
+
+        /*Comprovacions*/
         private bool ExisteixArticle(string codiArticle)
         {
             bool existeix = true;
@@ -723,28 +747,7 @@ namespace MiniERP
             return existeix;
         }
 
-        private bool ArticlesPendents()
-        {
-            bool pendents = true;
-            da = new OdbcDataAdapter("SELECT * FROM dcomanda WHERE rebut=false", cn);
-            ds = new DataSet();
-            da.Fill(ds);
-
-            if (ds.Tables[0].Rows.Count == 0) pendents = false;
-            return pendents;
-        }
-
-        private bool ArticlesPendents(int codiComanda)
-        {
-            bool pendents = true;
-            da = new OdbcDataAdapter("SELECT * FROM dcomanda WHERE codicomanda=" + codiComanda + " and rebut=false", cn);
-            ds = new DataSet();
-            da.Fill(ds);
-
-            if (ds.Tables[0].Rows.Count == 0) pendents = false;
-            return pendents;
-        }
-       
+      
 
         /*Errors*/
         private void CrearArxiuDerrors()

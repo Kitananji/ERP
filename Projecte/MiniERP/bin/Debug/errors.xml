@@ -20,4 +20,9 @@
     <data>27/05/2015 10:24:05</data>
     <descripcio>Importacio de proveidors ja existent</descripcio>
   </error>
+  <error>
+    <proces>Incorporacio d'albará</proces>
+    <data>27/05/2015 3:27:40</data>
+    <descripcio>Article no existent en la comanda</descripcio>
+  </error>
 </errors>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="CSS-Articles.css"?>
+<articles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="articles.xsd">
+  <article>
+      <codi>CH02</codi>
+      <descripcio>Alfiler P/mapa Barril x 100</descripcio>
+      <estoc>80</estoc>
+      <preu>30</preu>
+  </article>
+  <article>
+      <codi>CH01</codi>
+      <descripcio>Alfiler P/mapa Barril x 25</descripcio>
+      <estoc>13</estoc>
+      <preu>10</preu>
+  </article>
+  <article>
+      <codi>AL03</codi>
+      <descripcio>Almohadilla Dactilar</descripcio>
+      <estoc>8</estoc>
+      <preu>125</preu>
+  </article>
+  <article>
+      <codi>AL01</codi>
+      <descripcio>Almohadilla para Sello Mayka Nº 0</descripcio>
+      <estoc>99</estoc>
+      <preu>80</preu>
+  </article>
+  <article>
+      <codi>AL02</codi>
+      <descripcio>Almohadilla para Sello Mayka Nº 1</descripcio>
+      <estoc>78</estoc>
+      <preu>118</preu>
+  </article>
+  <article>
+      <codi>AL06</codi>
+      <descripcio>Almohadilla para Sello Printa Nº 2</descripcio>
+      <estoc>5</estoc>
+      <preu>58</preu>
+  </article>
+  <article>
+      <codi>AR01</codi>
+      <descripcio>Archicómodo Cartón Archi-Tainer Marrón</descripcio>
+      <estoc>35</estoc>
+      <preu>196</preu>
+  </article>
+  <article>
+      <codi>AR03</codi>
+      <descripcio>Archicómodo Cartón Natural</descripcio>
+      <estoc>16</estoc>
+      <preu>116</preu>
+  </article>
+  <article>
+      <codi>AR02</codi>
+      <descripcio>Archicómodo Plástico Blanco</descripcio>
+      <estoc>93</estoc>
+      <preu>195</preu>
+  </article>
+  <article>
+      <codi>AA03</codi>
+      <descripcio>Archivador Acordeón de Cartón Mayka t/ g</descripcio>
+      <estoc>22</estoc>
+      <preu>195</preu>
+  </article>
+  <article>
+      <codi>AA01</codi>
+      <descripcio>Archivador Acordeón de Cartón Mayka t/ca</descripcio>
+      <estoc>22</estoc>
+      <preu>215</preu>
+  </article>
+  <article>
+      <codi>AA02</codi>
+      <descripcio>Archivador Acordeón de Cartón Mayka t/of</descripcio>
+      <estoc>81</estoc>
+      <preu>225</preu>
+  </article>
+  <article>
+      <codi>AR04</codi>
+      <descripcio>Archivador Acordeón Plástico t/ giro</descripcio>
+      <estoc>0</estoc>
+      <preu>105</preu>
+  </article>
+  <article>
+      <codi>AR06</codi>
+      <descripcio>Archivador Lomo Ancho t/carta</descripcio>
+      <estoc>45</estoc>
+      <preu>432</preu>
+  </article>
+  <article>
+      <codi>AR07</codi>
+      <descripcio>Archivador Lomo Ancho t/oficio</descripcio>
+      <estoc>73</estoc>
+      <preu>432</preu>
+  </article>
+  <article>
+      <codi>JU01</codi>
+      <descripcio>Bandeja Acrílica 2 Niveles</descripcio>
+      <estoc>16</estoc>
+      <preu>255</preu>
+  </article>
+  <article>
+      <codi>JU02</codi>
+      <descripcio>Bandeja Acrílica 3 Niveles</descripcio>
+      <estoc>85</estoc>
+      <preu>340</preu>
+  </article>
+  <article>
+      <codi>JU03</codi>
+      <descripcio>Bandeja Malla Metálica 2 Niveles</descripcio>
+      <estoc>75</estoc>
+      <preu>1975</preu>
+  </article>
+  <article>
+      <codi>JU04</codi>
+      <descripcio>Bandeja Malla Metálica 3 Niveles</descripcio>
+      <estoc>53</estoc>
+      <preu>2370</preu>
+  </article>
+  <article>
+      <codi>TA01</codi>
+      <descripcio>Banderita 5 Colores</descripcio>
+      <estoc>49</estoc>
+      <preu>218</preu>
+  </article>
+  <article>
+      <codi>TA03</codi>
+      <descripcio>Banderita 5 Colores Firme Aquí</descripcio>
+      <estoc>41</estoc>
+      <preu>485</preu>
+  </article>
+  <article>
+      <codi>TA02</codi>
+      <descripcio>Banderita Gruesa Amarilla</descripcio>
+      <estoc>44</estoc>
+      <preu>208</preu>
+  </article>
+  <article>
+      <codi>TA04</codi>
+      <descripcio>Banderita Gruesa Amarilla Firme Aquí</descripcio>
+      <estoc>57</estoc>
+      <preu>362</preu>
+  </article>
+  <article>
+      <codi>TA06</codi>
+      <descripcio>Banderita Tipo Flecha 5 Colores</descripcio>
+      <estoc>13</estoc>
+      <preu>372</preu>
+  </article>
+  <article>
+      <codi>BL04</codi>
+      <descripcio>Block Cuadriculado 40 Hojas</descripcio>
+      <estoc>85</estoc>
+      <preu>89</preu>
+  </article>
+  <article>
+      <codi>BK01</codi>
+      <descripcio>Block de Cartulina de Construcción</descripcio>
+      <estoc>102</estoc>
+      <preu>84</preu>
+  </article>
+  <article>
+      <codi>BK02</codi>
+      <descripcio>Block de Notas Nº 2</descripcio>
+      <estoc>54</estoc>
+      <preu>10</preu>
+  </article>
+  <article>
+      <codi>BL05</codi>
+      <descripcio>Block de Notas Rayado</descripcio>
+      <estoc>11</estoc>
+      <preu>76</preu>
+  </article>
+  <article>
+      <codi>BL02</codi>
+      <descripcio>Block de Papel Lustrillo</descripcio>
+      <estoc>38</estoc>
+      <preu>77</preu>
+  </article>
+  <article>
+      <codi>BL06</codi>
+      <descripcio>Block de Papel Milimetrado</descripcio>
+      <estoc>22</estoc>
+      <preu>50</preu>
+  </article>
+  <article>
+      <codi>BL07</codi>
+      <descripcio>Block de Papel Rotulado 20 H</descripcio>
+      <estoc>108</estoc>
+      <preu>50</preu>
+  </article>
+  <article>
+      <codi>BL08</codi>
+      <descripcio>Block de Papel sin Rotular 20 H</descripcio>
+      <estoc>22</estoc>
+      <preu>50</preu>
+  </article>
+  <article>
+      <codi>BS01</codi>
+      <descripcio>Block de Rayas 40 Hojas</descripcio>
+      <estoc>159</estoc>
+      <preu>195</preu>
+  </article>
+  <article>
+      <codi>BL03</codi>
+      <descripcio>Block de Rayas 80 Hojas</descripcio>
+      <estoc>10</estoc>
+      <preu>337</preu>
+  </article>
+  <article>
+      <codi>BL01</codi>
+      <descripcio>Block de Taquigrafía</descripcio>
+      <estoc>92</estoc>
+      <preu>68</preu>
+  </article>
+</articles>

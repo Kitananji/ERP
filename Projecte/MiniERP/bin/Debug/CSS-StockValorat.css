@@ -1,8 +1,15 @@
 stockValorat{
   display: table;
-  border-spacing: 10px;
-  border: black 1px solid;
-  border-left: 40px;
+  border-spacing: 15px;
+  border:  1px solid;
+  margin: 30px;
+  font: lighter 16px 'Segoe UI';
+}
+
+stockValorat:before{
+ font: 23px 'Segoe UI';
+ content: "Estock valorat:";
+ display: table-caption;
 }
 
 article{
@@ -12,7 +19,40 @@ article{
 codi, descripcio, estoc, preu, preuParcial{
 	display: table-cell;
 }
-preuTotal, data{
-	display: table-row;
-	text-align: right;
+
+codi{
+    font: lighter 16px 'Segoe UI';
+    color: dodgerblue;
+}
+
+estoc:after{
+content: " uts.";
+}
+
+preu:after{
+ content: " €/ut.";
+}
+
+preuParcial:after{
+ content: " €";
+}
+
+preuTotal, data {
+    background-color: lightgray;
+    display: table-row;
+    text-align: right;
+}
+
+preuTotal:before{
+ content: "Valoració total: ";
+    font: 16px 'Segoe UI'; 
+}
+
+preuTotal:after{
+ content: " €";
+}
+
+data:before{
+ content: "Data de creació: ";
+    font: 16px 'Segoe UI'; 
 }

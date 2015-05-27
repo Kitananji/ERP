@@ -1,21 +1,61 @@
 pendentComanda{
 	display: table;
 	border-spacing: 10px;
-	border: black 1px solid;
-	border-left: 40px;
+	border:  1px solid black;
+    font: lighter 16px 'Segoe UI';
+    margin: 30px;
 }
 
-comanda{
-	display: table;
+pendentComanda:before{
+    font: 20px 'Segoe UI';
+ content: "Articles pendents: ";  
+ display: table-caption;
 }
+
+comanda{ 
+	display: table;    
+}
+
 article{
-	border-spacing: 10px;
+ margin-left: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 	border-left: 40px;
-}
-codi, codiProv, article{
-	display: table-cell;
+    display: list-item;
 }
 
+article > codi:before{
+	content: "Article: ";
+}
+
+comanda > codi:before{
+ content: "Comanda: ";
+        font: lighter 16px 'Segoe UI';
+    color: black;
+}
+
+comanda > codi{
+display: inline;
+        font: 16px 'Segoe UI';
+    color: dodgerblue;
+}
+
+codiProv{
+display: inline;
+    font: 16px 'Segoe UI';
+    color: dodgerblue;
+}
+
+codiProv:before{
+ content: " Proveidor: ";
+    font: lighter 16px 'Segoe UI';
+    color: black;
+}
+
+dataInforme:before{
+ content: "Data de creació: ";
+    font: 16px 'Segoe UI';
+}
 
 dataInforme{
 	display: table-row;

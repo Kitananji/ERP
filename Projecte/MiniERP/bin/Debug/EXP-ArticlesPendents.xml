@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="CSS-ArtPendents.css"?>
+<pendentComanda xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <comanda>
+      <codi>1</codi>
+      <codiProv>MSS1</codiProv>
+      <articles>
+        <article>
+          <codi>AR04</codi>
+        </article>
+        <article>
+          <codi>JU01</codi>
+        </article>
+        <article>
+          <codi>JU02</codi>
+        </article>
+        <article>
+          <codi>JU03</codi>
+        </article>
+        <article>
+          <codi>TA03</codi>
+        </article>
+        <article>
+          <codi>BL04</codi>
+        </article>
+      </articles>
+  </comanda>
+  <comanda>
+      <codi>2</codi>
+      <codiProv>BBCP</codiProv>
+      <articles>
+        <article>
+          <codi>BK02</codi>
+        </article>
+      </articles>
+  </comanda>
+  <dataInforme>27/05/2015 3:29:36</dataInforme>
+</pendentComanda>
