@@ -72,7 +72,7 @@ namespace MiniERP
         private void articlesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string nomFitxer;
-            saveFileDialog1.FileName = "articles.xml"; 
+            saveFileDialog1.FileName = "EXP-Articles .xml"; 
             saveFileDialog1.InitialDirectory = Application.StartupPath;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -84,7 +84,7 @@ namespace MiniERP
         private void proveïdorsToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             string nomFitxer;
-            saveFileDialog1.FileName = "proveidors.xml"; 
+            saveFileDialog1.FileName = "EXP-Proveidors.xml"; 
             saveFileDialog1.InitialDirectory = Application.StartupPath;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -96,7 +96,7 @@ namespace MiniERP
         private void articlesPendentsPerProveïdorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string nomFitxer;
-            saveFileDialog1.FileName = "articlesPendents.xml";
+            saveFileDialog1.FileName = "EXP-ArticlesPendents.xml";
             saveFileDialog1.InitialDirectory = Application.StartupPath;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -108,7 +108,7 @@ namespace MiniERP
         private void valoracióStockToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string nomFitxer;
-            saveFileDialog1.FileName = "valoracioStock.xml";
+            saveFileDialog1.FileName = "EXP-ValoracioStock.xml";
             saveFileDialog1.InitialDirectory = Application.StartupPath;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
