@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="CSSArtValorat.css"?>
+<stockValorat>
+  <articles>
+    <article>
+      <codi>AR07</codi>
+      <descripcio>Archivador Lomo Ancho t/oficio</descripcio>
+      <estoc>73</estoc>
+      <preu>432</preu>
+      <preuParcial>31536</preuParcial>
+    </article>
+    <article>
+      <codi>JU01</codi>
+      <descripcio>Bandeja Acrilica 2 Niveles</descripcio>
+      <estoc>16</estoc>
+      <preu>255</preu>
+      <preuParcial>4080</preuParcial>
+    </article>
+    <article>
+      <codi>JU02</codi>
+      <descripcio>Bandeja Acrilica 3 Niveles</descripcio>
+      <estoc>85</estoc>
+      <preu>340</preu>
+      <preuParcial>28900</preuParcial>
+    </article>
+    <article>
+      <codi>JU03</codi>
+      <descripcio>Bandeja Malla Metalica 2 Niveles</descripcio>
+      <estoc>75</estoc>
+      <preu>1975</preu>
+      <preuParcial>148125</preuParcial>
+    </article>
+    <article>
+      <codi>JU04</codi>
+      <descripcio>Bandeja Malla Metalica 3 Niveles</descripcio>
+      <estoc>53</estoc>
+      <preu>2370</preu>
+      <preuParcial>125610</preuParcial>
+    </article>
+    <article>
+      <codi>TA01</codi>
+      <descripcio>Banderita 5 Colores</descripcio>
+      <estoc>49</estoc>
+      <preu>218</preu>
+      <preuParcial>10682</preuParcial>
+    </article>
+    <article>
+      <codi>TA03</codi>
+      <descripcio>Banderita 5 Colores Firme Aqui</descripcio>
+      <estoc>41</estoc>
+      <preu>485</preu>
+      <preuParcial>19885</preuParcial>
+    </article>
+    <article>
+      <codi>TA02</codi>
+      <descripcio>Banderita Gruesa Amarilla</descripcio>
+      <estoc>44</estoc>
+      <preu>208</preu>
+      <preuParcial>9152</preuParcial>
+    </article>
+    <article>
+      <codi>TA04</codi>
+      <descripcio>Banderita Gruesa Amarilla Firme Aqui</descripcio>
+      <estoc>57</estoc>
+      <preu>362</preu>
+      <preuParcial>20634</preuParcial>
+    </article>
+    <article>
+      <codi>TA06</codi>
+      <descripcio>Banderita Tipo Flecha 5 Colores</descripcio>
+      <estoc>13</estoc>
+      <preu>372</preu>
+      <preuParcial>4836</preuParcial>
+    </article>
+    <article>
+      <codi>BL04</codi>
+      <descripcio>Block Cuadriculado 40 Hojas</descripcio>
+      <estoc>85</estoc>
+      <preu>89</preu>
+      <preuParcial>7565</preuParcial>
+    </article>
+    <article>
+      <codi>BK01</codi>
+      <descripcio>Block de Cartulina de Construccion</descripcio>
+      <estoc>42</estoc>
+      <preu>84</preu>
+      <preuParcial>3528</preuParcial>
+    </article>
+    <article>
+      <codi>BK02</codi>
+      <descripcio>Block de Notas N 2</descripcio>
+      <estoc>54</estoc>
+      <preu>10</preu>
+      <preuParcial>540</preuParcial>
+    </article>
+    <article>
+      <codi>BL05</codi>
+      <descripcio>Block de Notas Rayado</descripcio>
+      <estoc>11</estoc>
+      <preu>76</preu>
+      <preuParcial>836</preuParcial>
+    </article>
+    <article>
+      <codi>BL02</codi>
+      <descripcio>Block de Papel Lustrillo</descripcio>
+      <estoc>38</estoc>
+      <preu>77</preu>
+      <preuParcial>2926</preuParcial>
+    </article>
+    <article>
+      <codi>BL06</codi>
+      <descripcio>Block de Papel Milimetrado</descripcio>
+      <estoc>17</estoc>
+      <preu>50</preu>
+      <preuParcial>850</preuParcial>
+    </article>
+    <article>
+      <codi>BL07</codi>
+      <descripcio>Block de Papel Rotulado 20 H</descripcio>
+      <estoc>108</estoc>
+      <preu>50</preu>
+      <preuParcial>5400</preuParcial>
+    </article>
+    <article>
+      <codi>BL08</codi>
+      <descripcio>Block de Papel sin Rotular 20 H</descripcio>
+      <estoc>22</estoc>
+      <preu>50</preu>
+      <preuParcial>1100</preuParcial>
+    </article>
+    <article>
+      <codi>BS01</codi>
+      <descripcio>Block de Rayas 40 Hojas</descripcio>
+      <estoc>159</estoc>
+      <preu>195</preu>
+      <preuParcial>31005</preuParcial>
+    </article>
+    <article>
+      <codi>BL03</codi>
+      <descripcio>Block de Rayas 80 Hojas</descripcio>
+      <estoc>0</estoc>
+      <preu>337</preu>
+      <preuParcial>0</preuParcial>
+    </article>
+    <article>
+      <codi>BL01</codi>
+      <descripcio>Block de Taquigrafia</descripcio>
+      <estoc>92</estoc>
+      <preu>68</preu>
+      <preuParcial>6256</preuParcial>
+    </article>
+  </articles>
+  <preuTotal>556326</preuTotal>
+  <data>27/05/2015 10:28:53</data>
+</stockValorat>
+

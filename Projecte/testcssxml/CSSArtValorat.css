@@ -1,0 +1,15 @@
+articles{
+  display: table;
+  border-spacing: 10px;
+  border: black 1px solid;
+}
+
+article{
+	display: table-row;
+}
+
+codi, descripcio, estoc, preu, preuParcial{
+
+	
+	display: table-cell;
+}

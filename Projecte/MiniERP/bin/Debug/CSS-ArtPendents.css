@@ -1,0 +1,23 @@
+pendentComanda{
+	display: table;
+	border-spacing: 10px;
+	border: black 1px solid;
+	border-left: 40px;
+}
+
+comanda{
+	display: table;
+}
+article{
+	border-spacing: 10px;
+	border-left: 40px;
+}
+codi, codiProv, article{
+	display: table-cell;
+}
+
+
+dataInforme{
+	display: table-row;
+	text-align: right;
+}

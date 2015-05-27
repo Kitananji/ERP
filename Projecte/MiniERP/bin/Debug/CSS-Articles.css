@@ -1,0 +1,14 @@
+articles{
+  display: table;
+  border-spacing: 10px;
+  border: black 1px solid;
+  border-left: 40px;
+}
+
+article{
+	display: table-row;
+}
+
+codi, descripcio, estoc, preu{
+	display: table-cell;
+}

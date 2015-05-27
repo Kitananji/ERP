@@ -1,0 +1,14 @@
+proveidors{
+  display: table;
+  border-spacing: 10px;
+  border: black 1px solid;
+  border-left: 40px;
+}
+
+proveidor{
+	display: table-row;
+}
+
+codi, nom, adreça, poblacop, cp{
+	display: table-cell;
+}

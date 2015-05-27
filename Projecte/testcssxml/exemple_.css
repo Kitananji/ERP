@@ -1,0 +1,16 @@
+articles{
+	counter-reset:contador;
+}
+
+article:before{
+	content: counter(contador, upper-alpha) ".";
+	counter-increment: contador;
+}
+
+codi{
+  	display: inline;
+  	margin-left: 5px;
+}
+descripcio, estoc, preu, preuParcial{
+	display: block;
+  	margin-left: 25px;
