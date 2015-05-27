@@ -1,2 +1,3 @@
+*Es pot posar carpeta per exportacions? perque sino es pot maxacar els xml originals (proveidors, articles...)
 
 *Estils en llistats
